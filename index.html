@@ -1,0 +1,56 @@
+<html>
+<head>
+	<title>Raspberry Pi ASAP Setup Guide</title>
+	<meta name="author" content="Krisjanis Rijnieks">
+</head>
+
+<body>
+	<header>
+		<h1>Raspberry Pi ASAP Setup Guide</h1>
+		<aside>The fastest way to setup Raspberry Pi with Raspbian.</aside>
+	</header>
+
+	<section>
+		<h2>Download Raspbian</h2>
+		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a></p>
+	</section>
+
+	<section>
+		<h2>Prepare a SD card</h2>
+		<p>Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to chose one woth a higher class number. There is a list of RPi tested SD cards <a href="http://elinux.org/RPi_SD_cards">here</a>.</p>
+
+		<p>Once you've found a proper SD card, prepare it by formating it to FAT32 filesystem. Use DiskUtility or <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>.</p>
+	</section>
+
+	<section>
+		<h2>Burn Rasbian on to the SD card</h2>
+		<p class="mac">Open Terminal, cd to the directory where your Raspbian image is located (eg. <span class="path">~/Downloads</span>) and issue <span class="command"></span> the following commands to see the device path of your SD card. You should get a similar output to the following.</p>
+
+		<pre>TODO</pre>
+
+		<p>From the list here we can tell that the device that we need hides under the path <span class="path">/dev/disk2</span>. we need to unmount it by issuing <span>diskutil unmountDisk /dev/disk2</span> command.</p>
+
+		<p>When that's done, we can start burning the Raspbian image onto the SD card. Be careful, make sure that you use the right device path or you might damage your computer. To burn the image, use the following command (it will take some time):</p>
+
+		<pre>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/rdisk2 bs=1m</pre>
+
+		<p><span class="command">if</span> is the input, <span class="command">of</span> is the output and <span class="command">bs</span> is the size of chunk of data that is being written to the output at a time.</p>
+	</section>
+
+	<section>
+		<h2>Assigning IP address</h2>
+		<p>In order to access the Raspberry Pi for further configuration we will need to do two things:</p>
+		<ol>
+			<li>Set a IP address</li>
+			<li>Enable SSH</li>
+		</ol>
+		<p>First - the IP address. Mount the SD card and go to the boot partition of it. There you will find the <span class="filename">cmdline.txt</span>. These are the options that are passed to the Linux kernel as it boots up. We need to add the following option there:</p>
+		<pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+		<p>We will be able to access the Pi through network with the IP address 192.168.1.200 after we set our ethernet connections TCP/IP settings correctly.</p>
+		<p>Second thing - enable SSH. Open the file <span class="filename">config.txt</span> and </p>
+	</section>
+
+
+</body>
+
+</html>
