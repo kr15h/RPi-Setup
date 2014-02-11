@@ -112,6 +112,16 @@ gateway 192.168.1.1</pre>
 	<section>
 		<h2>Startup scripts</h2>
 		<p>In this section we are going to talk about starting programs automatically after the Pi has booted up. We will also make sure that the scripts are not run when we are logging in through SSH.</p>
+
+		<pre>#!/bin/bash
+
+echo "Checking SSH connection...";
+if [ -z "$SSH_CONNECTION" ]; then
+	echo "No SSH connection, launching scripts.";
+	# Your scripts here
+else
+	echo "SSH connection, nothing to be launched.";
+fi</pre>
 	</section>
 
 
