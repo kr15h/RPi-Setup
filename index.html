@@ -132,7 +132,26 @@ gateway 192.168.1.1</pre>
 
 	<section>
 		<h2>Startup scripts</h2>
-		<p>In this section we are going to talk about starting programs automatically after the Pi has booted up. We will also make sure that the scripts are not run when we are logging in through SSH.</p>
+
+		Starting a program on boot
+		<p>In /home/pi create an executable shell script called startup.sh:</p>
+
+	<pre>touch startup.sh
+chmod a+x startup.sh</pre>
+		
+		<p>Then open .bashrc</p> 
+
+		<pre>sudo nano ~/.bashrc</pre>
+
+		<p>and add the following line at the end of the file:</p>
+
+		<pre>~/startup.sh</pre>
+
+		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <span>startup.sh</span> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
+
+		<pre>sudo nano ~/startup.sh</pre>
+
+		<p>Replace the contents of the file with the following:</p>
 
 		<pre>#!/bin/bash
 
@@ -143,6 +162,10 @@ if [ -z "$SSH_CONNECTION" ]; then
 else
 	echo "SSH connection, nothing to be launched.";
 fi</pre>
+
+		<p>You can add your own scripts just after the <span># Your scripts here</span> line.</p>
+
+		<p>Close and save the file by using <span>Ctrl+X</span>, <span>y</span> and <span>Return</span>.</p>
 	</section>
 
 
