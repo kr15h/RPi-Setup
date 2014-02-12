@@ -12,6 +12,7 @@
 
 	<section>
 		<h2>Tools and knowledge overview</h2>
+
 		<p>We will need a couple of tools to be able to work with the Pi throughout the process. We will be using SSH most of the time. There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH commands without problems. A special case is Windows - we need a new application for that. <a href="http://www.putty.org">Putty</a> has proven itself to be a very good SSH client for Widows.</p>
 
 		<p>We will need to upload and download files to and from the Raspberry Pi. We won't have to install any special applications / protocols like Samba - we will use the SCP (Secure CoPy or Secure Copy Protocol) that is built on top of the SSH protocol and allows secure transfer of files. For that we will use single application for all platforms: <a href="https://filezilla-project.org">FileZilla</a>.</p>
@@ -21,14 +22,16 @@
 
 	<section>
 		<h2>Download Raspbian</h2>
+
 		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a></p>
 	</section>
 
 	<section>
 		<h2>Prepare a SD card</h2>
-		<p>Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to chose one woth a higher class number. There is a list of RPi tested SD cards <a href="http://elinux.org/RPi_SD_cards">here</a>.</p>
 
-		<p>Once you've found a proper SD card, prepare it by formating it to FAT32 filesystem. Use DiskUtility or <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>.</p>
+		<p>Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to chose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>. I usually go with SanDisk or Kingston.</p>
+
+		<p>Once you've found a proper SD card, prepare it by formating it to FAT32 filesystem. Use <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. You can use Mac DiskUtility, but SDFormatter is the recomended way.</p>
 	</section>
 
 	<section>
@@ -115,7 +118,16 @@ gateway 192.168.1.1</pre>
 
 	<section>
 		<h2>Auto Login</h2>
-		<p>How to disable the need to login each time the Pi is started up.</p>
+		
+		<p>To make your pi log in automatically, run the following line in the shell:</p>
+
+		<pre>sudo nano /etc/inittab</pre>
+		
+		<p>Comment (by using #) the line starting the terminal tty1 ("1:2345:respawn:/sbin/getty 115200 tty1"), and just bellow it add:</p>
+
+		<pre>1:2345:respawn:/bin/login -f pi tty1 /dev/tty1 2>&1</pre>
+
+		<p>Close file and save by pressing <span>Ctrl+X</span> and <span>Y</span> and then <span>Return</span>.</p>
 	</section>
 
 	<section>
