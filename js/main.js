@@ -47,10 +47,8 @@ var showOS = function(os){
 		var t = $(selector)[0].tagName.toLowerCase();
 		if ( t == "p" || t == "div" || t == "ul" || t == "ol" ) {
 			$(selector).css("display", "block");
-			$(selector).css("display", "initial");
 		} else {
 			$(selector).css("display", "inline");
-			$(selector).css("display", "initial");
 		}
 	}
 }
