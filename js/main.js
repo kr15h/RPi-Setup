@@ -44,12 +44,15 @@ var showOS = function(os){
 		default: break;
 	}
 	if (selector != "") {
-		var t = $(selector)[0].tagName.toLowerCase();
-		if ( t == "p" || t == "div" || t == "ul" || t == "ol" ) {
-			$(selector).css("display", "block");
-		} else {
-			$(selector).css("display", "inline");
-		}
+		$(selector).each( function(){
+			var t = $(this)[0].tagName.toLowerCase();
+			console.log(t);
+			if ( t == "p" || t == "div" || t == "ul" || t == "ol" ) {
+				$(this).css("display", "block");
+			} else {
+				$(this).css("display", "inline");
+			}
+		});
 	}
 }
 
