@@ -36,7 +36,6 @@ var hideAllOS = function(){
 }
 
 var showOS = function(os){
-	console.log(os);
 	var selector = "";
 	switch(os){
 		case "Mac": selector = ".mac"; break;
@@ -45,8 +44,14 @@ var showOS = function(os){
 		default: break;
 	}
 	if (selector != "") {
-		$(selector).css("display", "inline");
-		$(selector).css("display", "initial");
+		var t = $(selector)[0].tagName.toLowerCase();
+		if ( t == "p" || t == "div" || t == "ul" || t == "ol" ) {
+			$(selector).css("display", "block");
+			$(selector).css("display", "initial");
+		} else {
+			$(selector).css("display", "inline");
+			$(selector).css("display", "initial");
+		}
 	}
 }
 
