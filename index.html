@@ -16,9 +16,13 @@
 	<section>
 		<h2>Tools and knowledge overview</h2>
 
-		<p>We will need a couple of tools to be able to work with the Pi throughout the process. We will be using SSH most of the time. There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH commands without problems. A special case is Windows - we need a new application for that. <a href="http://www.putty.org">Putty</a> has proven itself to be a very good SSH client for Widows.</p>
+		<p>We will need a couple of tools to be able to work with the Pi throughout the process. First - we need to make sure that we have hardware that allows us to read and write SD cards as the Raspberry Pi needs a SD card to be able to wake up.</p>
 
-		<p>We will need to upload and download files to and from the Raspberry Pi. We won't have to install any special applications / protocols like Samba - we will use the SCP (Secure CoPy or Secure Copy Protocol) that is built on top of the SSH protocol and allows secure transfer of files. For that we will use single application for all platforms: <a href="https://filezilla-project.org">FileZilla</a>.</p>
+		<p>We will be using SSH most of the time. SSH (Secure SHell) is a secure network protocol that allows to control other computers over network.</p>
+
+		<p>There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH without any issues. Windows is a special case - we need a separate program for that. <a href="http://www.putty.org">Putty</a> has proven itself to be a good SSH client for Widows.</p>
+
+		<p>We will need to upload and download files to and from the Raspberry Pi. We will make use of the SCP (Secure CoPy or Secure Copy Protocol) that is built on top of the SSH protocol and allows secure transfer of files. Download <a href="https://filezilla-project.org">FileZilla</a>. It works on Mac, Linux and Windows.</p>
 
 		<p>Basic knowledge of <a href="http://www.johnstowers.co.nz/blog/pages/bash-cheat-sheet.html">shell scripting</a> and command line text-editing tools like <a href="http://www.cs.rit.edu/~cslab/vi.html">vi</a> or <a href="http://www.tuxradar.com/content/text-editing-nano-made-easy">nano</a> will be useful as we will be using the command line a lot.</p>
 	</section>
@@ -26,15 +30,15 @@
 	<section>
 		<h2>Download Raspbian</h2>
 
-		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a></p>
+		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a>. Unzip the file after the download is over.</p>
 	</section>
 
 	<section>
-		<h2>Prepare a SD card</h2>
+		<h2>Prepare SD card</h2>
 
 		<p>Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to chose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>. I usually go with SanDisk or Kingston.</p>
 
-		<p>Once you've found a proper SD card, prepare it by formating it to FAT32 filesystem. Use <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. You can use Mac DiskUtility, but SDFormatter is the recomended way.</p>
+		<p>Once you've found a proper SD card, prepare it by formating it to FAT32 filesystem. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time. Use <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. You can use Mac DiskUtility, but SDFormatter is the recomended way.</p>
 	</section>
 
 	<section>
