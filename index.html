@@ -44,39 +44,36 @@
 	<div class="container">
 	
 		<h1>Raspberry Pi ASAP Setup Guide</h1>
-		<p>A fast way to setup Raspberry Pi with Raspbian.</p>
+		<p>A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
 
 		<!-- SECTION -->
 		<h2>Tools and knowledge overview</h2>
 
 		<p>We will need a couple of tools to be able to work with the Pi throughout the process. First - we need to make sure that we have hardware that allows us to read and write SD cards as the Raspberry Pi needs a SD card to be able to wake up.</p>
 
-		<p>We will be using SSH most of the time. SSH (Secure SHell) is a secure network protocol that allows to control other computers over network.</p>
-
-		<p class="mac linux">There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH without any issues.</p>
-
-		<p class="win">If you are on Windows, download <a href="http://www.putty.org">Putty</a> for using it as your SSH client.</p>
+		<p>We will be using SSH most of the time. SSH (Secure SHell) is a secure network protocol that allows to control other computers over network. <span class="mac linux">There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH without any issues.</span><span class="win">If you are using Windows, download <a href="http://www.putty.org">Putty</a> for using it as your SSH client.</span></p>
 
 		<p>We will need to upload and download files to and from the Raspberry Pi. We will make use of the SCP (Secure CoPy or Secure Copy Protocol) that is built on top of the SSH protocol and allows secure transfer of files. Download <a href="https://filezilla-project.org">FileZilla</a>. It works on Mac, Linux and Windows. <span class="win">You might consider <a href="http://winscp.net">WinSCP</a> as your weapon of choice if you are using Windows.</span></p>
 
-		<p>Basic knowledge of <a href="http://www.johnstowers.co.nz/blog/pages/bash-cheat-sheet.html">shell scripting</a> and command line text-editing tools like <a href="http://www.cs.rit.edu/~cslab/vi.html">vi</a> or <a href="http://www.tuxradar.com/content/text-editing-nano-made-easy">nano</a> will be useful as we will be using the command line more than once.</p>
-	
+		<p>Basic knowledge of <a href="http://www.johnstowers.co.nz/blog/pages/bash-cheat-sheet.html">shell scripting</a> and command line text-editing tools like <a href="http://www.tuxradar.com/content/text-editing-nano-made-easy">nano</a> will be useful as we will be using the shell more than once.</p>
 
-		<!-- SECTION -->
 		<h2>Install Raspbian</h2>
 
 		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a>. Download and unarchive.</p>
 
-		<!-- SECTION -->
 		<h3>Prepare SD card</h3>
 
 		<p>Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to choose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>. I usually go with SanDisk or Kingston.</p>
 
-		<p class="mac win">Once you've found a proper SD card, prepare it by formating it to FAT32 filesystem. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time. Use <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. You can use Mac Disk Utility, but SDFormatter is the recomended way.</p>
-	</section>
+		<p>Once you've found a proper SD card, prepare it by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
 
-	<section>
-		<h2>Burn Rasbian on to the SD card</h2>
+		<p class="mac win">Download <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a> if you use Mac or Windows. <span class="mac">You can use Mac Disk Utility, but SDFormatter is the recomended way.</span></p>
+
+		<p class="linux">Use <a href="http://gparted.org">GParted</a> to format your SD card to FAT32 file system.</p>
+
+		
+		<h3>Burn Rasbian on to the SD card</h3>
+
 		<p class="mac">Open Terminal, cd to the directory where your Raspbian image is located (eg. <span class="path">~/Downloads</span>) and issue <span class="command"></span> the following commands to see the device path of your SD card. You should get a similar output to the following.</p>
 
 		<pre>TODO</pre>
@@ -88,7 +85,6 @@
 		<pre>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/rdisk2 bs=1m</pre>
 
 		<p><span class="command">if</span> is the input, <span class="command">of</span> is the output and <span class="command">bs</span> is the size of chunk of data that is being written to the output at a time.</p>
-	</section>
 
 	<section>
 		<h2>Assigning IP address</h2>

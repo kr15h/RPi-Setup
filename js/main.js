@@ -46,7 +46,6 @@ var showOS = function(os){
 	if (selector != "") {
 		$(selector).each( function(){
 			var t = $(this)[0].tagName.toLowerCase();
-			console.log(t);
 			if ( t == "p" || t == "div" || t == "ul" || t == "ol" ) {
 				$(this).css("display", "block");
 			} else {
