@@ -74,26 +74,84 @@
 		
 		<h3>Burn Rasbian on to the SD card</h3>
 
-		<p class="mac">Open Terminal, cd to the directory where your Raspbian image is located (eg. <span class="path">~/Downloads</span>) and issue <span class="command"></span> the following commands to see the device path of your SD card. You should get a similar output to the following.</p>
+		<div class="mac">
+		<p>Open Terminal, cd to the directory where your Raspbian image is located (eg. <b>~</b> - your home directory) and use the following command to see what devices are connected to your computer</p>
 
-		<pre>TODO</pre>
+		<pre>diskutil list</pre>
 
-		<p>From the list here we can tell that the device that we need hides under the path <span class="path">/dev/disk2</span>. we need to unmount it by issuing <span>diskutil unmountDisk /dev/disk2</span> command.</p>
+		<p>The output in the Terminal window will look similar as the following:</p>
 
-		<p>When that's done, we can start burning the Raspbian image onto the SD card. Be careful, make sure that you use the right device path or you might damage your computer. To burn the image, use the following command (it will take some time):</p>
+		<pre>/dev/disk0
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *256.1 GB   disk0
+   1:                        EFI EFI                     209.7 MB   disk0s1
+   2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
+   3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3</pre>
 
-		<pre>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/rdisk2 bs=1m</pre>
+   		<p>Next - insert your SD card and issue the <b>diskutil</b> command again:</p>
 
-		<p><span class="command">if</span> is the input, <span class="command">of</span> is the output and <span class="command">bs</span> is the size of chunk of data that is being written to the output at a time.</p>
+   		<pre>diskutil list</pre>
 
-	<section>
+   		<p>Press <b>Enter</b> and this time you should get output similar to this:</p>
+
+   		<pre>/dev/disk0
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:      GUID_partition_scheme                        *256.1 GB   disk0
+   1:                        EFI EFI                     209.7 MB   disk0s1
+   2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
+   3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3
+/dev/disk1
+   #:                       TYPE NAME                    SIZE       IDENTIFIER
+   0:     FDisk_partition_scheme                        *3.9 GB     disk1
+   1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
+</pre>
+		
+		<p>As you see, there is a new device - <b>/dev/disk1</b>. If you have more devices connected to your computer, the ID might look different. Try to find the ID that was not there before you inserted the SD card.</p>
+
+		<p>Now we have to navigate to the directory where our Raspbian image is saved. Let's assume that it is in our home directory. To go to the home directory, thype the following in the terminal window:</p>
+
+		<pre>cd ~</pre>
+
+		<p>Press Enter. Check if the Raspbian image file is in the directory by entering the following command in the Terminal:</p>
+
+		<pre>ls</pre>
+
+		<p>A list of all files and folders in the directory should be output in the Terminal window. You should see the image file <b>2014-01-07-wheezy-raspbian.img</b> among them.</p>
+
+		<p>Unmount the SD card to be able to write the image by using the following command:</p>
+
+		<pre>diskutil unmount /dev/disk1</pre>
+
+		<p>Wait till the disk is unmounted and then continue with the most important part - overwritting the contents of the SD card with the image. <b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong drive ID.</p>
+
+		<pre>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/rdisk1 bs=1m</pre>
+
+		<p><b>if</b> is the input, <b>of</b> is the output and <b>bs</b> is the size of chunk of data that is being written to the output (the SD card, <b>/dev/rdisk1</b>) at a time.</p>
+
+		<p>Double check the <b>of=/dev/rdisk1</b> part and press <b>Enter</b>. This process will some time. So go make a coffee. And a sandwich. You might be curious why the 'r' before the 'disk1'. Some people say it's faster. I believe.</p>
+
+		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <b>ls</b> and <b>cd</b>), eject the SD card by using this command:</p>
+
+		<pre>diskutil eject /dev/disk1</pre>
+
+		<p>When the terminal has returned to it's normal state, you can remove your SD card.</p>
+		</div><!-- mac -->
+
+		<div class="win">
+			<p>Windows instructions comming soon...</p>
+		</div><!-- win -->
+
+		<div class="linux">
+			<p>Linux instructions comming soon...</p>
+		</div>
+
+
 		<h2>Assigning IP address</h2>
 		<p>In order to access the Raspberry Pi for further configuration we will need to set an IP address.</p>
 		<p>To do that, mount the SD card and go to the boot partition of it. There you will find a file named <span class="filename">cmdline.txt</span>. This file contains options that are passed to the Linux kernel as it boots up. We need to add the following at the end of the existing content:</p>
 		<pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
 		<p>We will be able to access the Pi through network with the IP address 192.168.1.200 after we set our ethernet connections TCP/IP settings correctly.</p>
 		<p>Adjust your computer's network settings. Set the IP to 192.168.1.200, netmask to 255.255.255.0 and the gateway (router) address to 192.168.1.1. You may need to disconnect from any wireless newtorks to make it work.</p>
-	</section>
 
 	<section>
 		<h2>Booting up - the first time</h2>
