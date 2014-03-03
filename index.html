@@ -45,7 +45,7 @@
 	<div class="container">
 	
 		<h1>Raspberry Pi ASAP Setup Guide</h1>
-		<p>A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
+		<p class="lead">A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
 
 		<!-- SECTION -->
 		<h2>Tools and knowledge overview</h2>
@@ -60,7 +60,7 @@
 
 		<h2>Install Raspbian</h2>
 
-		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a>. Download and unarchive.</p>
+		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a>. Download and unarchive in your home directory.</p>
 
 		<h3>Prepare SD card</h3>
 
@@ -76,11 +76,7 @@
 		<h3>Burn Rasbian on to the SD card</h3>
 
 		<div class="mac">
-		<p>Open Terminal and use the following command to see what devices are connected to your computer:</p>
-
-		<pre>diskutil list</pre>
-
-		<p>The output in the Terminal window will look similar as the following:</p>
+		<p>Open Terminal, write <code>diskutil list</code> and press <kbd>Return</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar as the following:</p>
 
 		<pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -89,11 +85,7 @@
    2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
    3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3</pre>
 
-   		<p>Next - insert your SD card and issue the <b>diskutil</b> command again:</p>
-
-   		<pre>diskutil list</pre>
-
-   		<p>Press <b>Enter</b> and this time you should get output similar to this:</p>
+   		<p>Next - insert your SD card and issue the <code>diskutil list</code> command again. Press <kbd>Return</kbd> and this time you should get output similar to this:</p>
 
    		<pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -107,35 +99,25 @@
    1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
 </pre>
 		
-		<p>As you see, there is a new device - <b>/dev/disk1</b>. If you have more devices connected to your computer, the ID might look different. Try to find the ID that was not there before you inserted the SD card.</p>
+		<p>As you see, there is a new device - <code>/dev/disk1</code>. If you have more devices connected to your computer, the ID might look different. Try to find the ID that was not there before you inserted the SD card.</p>
 
-		<p>Now we have to navigate to the directory where our Raspbian image is saved. Let's assume that it is in our home directory. To go to the home directory, thype the following in the terminal window:</p>
+		<p>Now we have to navigate to the directory where our Raspbian image is saved. Let's assume that it is in our home directory. To go to the home directory, type <code>cd ~</code> in the terminal window and press <kbd>Return</kbd> again. Check if the Raspbian image file is in the directory by writing the <code>ls</code> command and pressing <kbd>Return</kbd>.</p>
 
-		<pre>cd ~</pre>
+		<p>A list of all files and folders in the directory should be output in the Terminal window. You should see the image file <code>2014-01-07-wheezy-raspbian.img</code> among them.</p>
 
-		<p>Press Enter. Check if the Raspbian image file is in the directory by entering the following command in the Terminal:</p>
+		<p>Unmount the SD card to be able to write the image by using the <code>diskutil unmount /dev/disk1</code> command.</p>
 
-		<pre>ls</pre>
+		<p>Wait till the disk is unmounted and then continue with the most important part - overwritting the contents of the SD card with the image.</p>
 
-		<p>A list of all files and folders in the directory should be output in the Terminal window. You should see the image file <b>2014-01-07-wheezy-raspbian.img</b> among them.</p>
-
-		<p>Unmount the SD card to be able to write the image by using the following command:</p>
-
-		<pre>diskutil unmount /dev/disk1</pre>
-
-		<p>Wait till the disk is unmounted and then continue with the most important part - overwritting the contents of the SD card with the image. <b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong drive ID.</p>
+		<p class="text-danger"><b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong drive ID.</p>
 
 		<pre>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/rdisk1 bs=1m</pre>
 
-		<p><b>if</b> is the input, <b>of</b> is the output and <b>bs</b> is the size of chunk of data that is being written to the output (the SD card, <b>/dev/rdisk1</b>) at a time.</p>
+		<p><code>if</code> is the input, <code>of</code> is the output and <code>bs</code> is the size of chunk of data that is being written to the output (the SD card, <code>/dev/rdisk1</code>) at a time.</p>
 
-		<p>Double check the <b>of=/dev/rdisk1</b> part and press <b>Enter</b>. This process will some time. So go make a coffee. And a sandwich. You might be curious why the 'r' before the 'disk1'. Some people say it's faster. I believe.</p>
+		<p>Double check the <code>of=/dev/rdisk1</code> part and press <kbd>Return</kbd>. This process will some time. So go make a coffee. And a sandwich. You might be curious why the <code>r</code> before the <code>disk1</code>. Some people say it's faster. I believe.</p>
 
-		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <b>ls</b> and <b>cd</b>), eject the SD card by using this command:</p>
-
-		<pre>diskutil eject /dev/disk1</pre>
-
-		<p>When the terminal has returned to it's normal state, you can remove your SD card.</p>
+		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <code>ls</code> and <code>cd</code>), eject the SD card by using <code>diskutil eject /dev/disk1</code>. When the terminal has returned to it's normal state, you can remove your SD card.</p>
 		</div><!-- mac -->
 
 		<div class="win">
@@ -149,10 +131,16 @@
 
 		<h2>Assigning IP address</h2>
 		<p>In order to access the Raspberry Pi for further configuration we will need to set an IP address.</p>
-		<p>To do that, mount the SD card and go to the boot partition of it. There you will find a file named <span class="filename">cmdline.txt</span>. This file contains options that are passed to the Linux kernel as it boots up. We need to add the following at the end of the existing content:</p>
+		<p>To do that, mount the SD card and go to the boot partition of it. There you will find a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. We need to add the following at the end of the existing content:</p>
+
 		<pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-		<p>We will be able to access the Pi through network with the IP address 192.168.1.200 after we set our ethernet connections TCP/IP settings correctly.</p>
-		<p>Adjust your computer's network settings. Set the IP to 192.168.1.200, netmask to 255.255.255.0 and the gateway (router) address to 192.168.1.1. You may need to disconnect from any wireless newtorks to make it work.</p>
+		
+		<p>so it looks like: </p>
+
+		<pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+		<p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code> after we set our ethernet connections TCP/IP settings correctly.</p>
+		<p>Adjust your computer's network settings. Set the <b>IP</b> to <code>192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless newtorks to make it work.</p>
 
 	<section>
 		<h2>Booting up - the first time</h2>
@@ -160,7 +148,7 @@
 
 		<p>TODO: introduce to Terminal (Mac and Linux) and CMD (Win).</p>
 
-		<p>First try to ping the Pi with the following command: <span class="command">ping 192.168.1.200</span>. There should be response:</p>
+		<p>First try to ping the Pi by using the following command in the Terminal: <code>ping 192.168.1.200</code>. There should be response:</p>
 
 		<pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
 
@@ -168,9 +156,9 @@
 
 		<pre>ssh pi@192.168.1.200</pre>
 
-		<p>Enter passwoord: <span class="command">raspberry</span>. Now we're in. Let's change the real network settings.</p>
+		<p>Enter passwoord: <code>raspberry</code>. Now we're in. Let's change the real network settings.</p>
 
-		<p>To do that open the <span class="filename">/etc/network/interfaces</span> file in an text editor like the commandline nano. Write this in to the Terminal or Putty (whatever you use for communicating with the Pi):</p>
+		<p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Write this in to the Terminal or Putty (whatever you use for communicating with the Pi):</p>
 
 		<pre>sudo nano /etc/network/interfaces</pre>
 
@@ -181,30 +169,21 @@
 iface lo inet loopback
 iface eth0 inet static
 
-auto wlan0
-allow-hotplug wlan0
-iface wlan0 inet static
-wpa-ssid "YourWirelessNetwork"
-wpa-psk "YourWirelessPassword"
-
-# Assign your own if needed
 address 192.168.1.200
 netmask 255.255.255.0
 gateway 192.168.1.1</pre>
 
-		<p>Press <span class="key">Ctrl+X</span> to exit and then <span class="key">Y+Return</span> to save.</p>
+		<p>Press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save.</p>
 
-		<p>Now we have to remove the extra line from <span class="filename">cmdline.txt</span> that we added earlier. To do that, open the file in nano by issuing the following command in Terminal or Putty:</p>
+		<p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by issuing the following command in Terminal or Putty:</p>
 
 		<pre>sudo nano /boot/cmdline.txt</pre>
 
-		<p>Delete the <span class="code">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</span> part and press <span class="key">Ctrl+X</span> to exit and then <span class="key">Y+Return</span> to save again.</p>
+		<p>Delete the <code>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save again.</p>
 
-		<p>Now, let's reboot our Pi by using the following command in Terminal or Putty</p>
+		<p>Now, let's reboot our Pi by using the following command in Terminal or Putty by using the <code>sudo reboot</code> command.</p>
 
-		<pre>sudo reboot</pre>
-
-		<p>Connect to your wireless network again if you did disconect from it earlier. In approximately 15 seconds you will be able to SSH to the Pi by using IP address 192.168.1.200 (if you have not changed it for something else), username "pi" and password "raspberry".</p>
+		<p>Connect to your wireless network again if you did disconect from it earlier. In approximately 15 seconds you will be able to SSH to the Pi by using IP address <code>192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
 	</section>
 
 	<section>
@@ -219,23 +198,23 @@ gateway 192.168.1.1</pre>
 
 		<pre>sudo nano /etc/inittab</pre>
 		
-		<p>Comment (by using #) the line starting the terminal tty1 ("1:2345:respawn:/sbin/getty 115200 tty1"), and just bellow it add:</p>
+		<p>Comment (by using #) the line starting the terminal tty1 ("<code>1:2345:respawn:/sbin/getty 115200 tty1</code>"), and just bellow it add:</p>
 
 		<pre>1:2345:respawn:/bin/login -f pi tty1 /dev/tty1 2>&1</pre>
 
-		<p>Close file and save by pressing <span>Ctrl+X</span> and <span>Y</span> and then <span>Return</span>.</p>
+		<p>Close file and save by pressing <kbd>Ctrl+X</kbd> and <kbd>Y</kbd> and then <kbd>Return</kbd>.</p>
 	</section>
 
 	<section>
 		<h2>Startup scripts</h2>
 
 		Starting a program on boot
-		<p>In /home/pi create an executable shell script called startup.sh:</p>
+		<p>In <code>/home/pi</code> create an executable shell script called <code>startup.sh</code>:</p>
 
 	<pre>touch startup.sh
 chmod a+x startup.sh</pre>
 		
-		<p>Then open .bashrc</p> 
+		<p>Then open <code>.bashrc</code></p> 
 
 		<pre>sudo nano ~/.bashrc</pre>
 
@@ -243,7 +222,7 @@ chmod a+x startup.sh</pre>
 
 		<pre>~/startup.sh</pre>
 
-		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <span>startup.sh</span> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
+		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
 
 		<pre>sudo nano ~/startup.sh</pre>
 
@@ -259,9 +238,9 @@ else
 	echo "SSH connection, nothing to be launched.";
 fi</pre>
 
-		<p>You can add your own scripts just after the <span># Your scripts here</span> line.</p>
+		<p>You can add your own scripts just after the <code># Your scripts here</code> line.</p>
 
-		<p>Close and save the file by using <span>Ctrl+X</span>, <span>y</span> and <span>Return</span>.</p>
+		<p>Close and save the file by using <kbd>Ctrl+X</kbd>, <kbd>y</kbd> and <kbd>Return</kbd>.</p>
 	</section>
 	</div>
 
