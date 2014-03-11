@@ -77,7 +77,7 @@
 		<h3>Burn Rasbian on to the SD card</h3>
 
 		<div class="mac">
-		<p>Open Terminal, write <code>diskutil list</code> and press <kbd>Return</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar as the following:</p>
+		<p>Open Terminal, type <code>diskutil list</code> and press <kbd>Return</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar as the following:</p>
 
 		<pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -102,7 +102,7 @@
 		
 		<p>As you see, there is a new device - <code>/dev/disk1</code>. If you have more devices connected to your computer, the ID might look different. Try to find the ID that was not there before you inserted the SD card.</p>
 
-		<p>Now we have to navigate to the directory where our Raspbian image is saved. Let's assume that it is in our home directory. To go to the home directory, type <code>cd ~</code> in the terminal window and press <kbd>Return</kbd> again. Check if the Raspbian image file is in the directory by writing the <code>ls</code> command and pressing <kbd>Return</kbd>.</p>
+		<p>Now we have to navigate to the directory where our Raspbian image is saved. Let's assume that it is in our home directory (usually <code>/Users/you/</code>). To go to the home directory, type <code>cd ~</code> in the terminal window and press <kbd>Return</kbd> again. Check if the Raspbian image file is in the directory by writing the <code>ls</code> command and pressing <kbd>Return</kbd>.</p>
 
 		<p>A list of all files and folders in the directory should be output in the Terminal window. You should see the image file <code>2014-01-07-wheezy-raspbian.img</code> among them.</p>
 
@@ -129,10 +129,24 @@
 			<p>Linux instructions comming soon...</p>
 		</div>
 
+		<h2>Sharing your computer's internet connection with the Raspberry Pi</h2>
 
-		<h2>Assigning IP address</h2>
-		<p>In order to access the Raspberry Pi for further configuration we will need to set an IP address.</p>
-		<p>To do that, mount the SD card and go to the boot partition of it. There you will find a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. We need to add the following at the end of the existing content:</p>
+		<p>The Raspbian Linux distribution strongly relies on software packages and repositories that can be accessed through the internet. It means that you do need an internet connection to be able to set up and work with the Raspberry Pi. In this step we will configure our personal computer to share it's internet connection with our Raspberry Pi via ethernet connection.</p>
+
+		<div class="mac">
+			<p>TODO</p>
+		</div>
+		<div class="linux">
+			<p>TODO</p>
+		</div>
+		<div class="win">
+			<p>TODO</p>
+		</div>
+
+		<h2>Assigning Raspberry Pi IP address</h2>
+		
+		<p>In order to access the Raspberry Pi for further configuration we will need to give it an initial IP address.</p>
+		<p>To do that, insert the SD card in the reader and go to the boot partition of it. There you will find a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
 
 		<pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
 		
@@ -141,29 +155,34 @@
 		<pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
 
 		<p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code> after we set our ethernet connections TCP/IP settings correctly.</p>
-		<p>Adjust your computer's network settings. Set the <b>IP</b> to <code>192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless newtorks to make it work.</p>
+		<p>Adjust your computer's network settings. Set the IP address to <code>192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless networks to make it work.</p>
 
-	<section>
 		<h2>Booting up - the first time</h2>
 		<p>Connect your Raspberry Pi to the computer with an ethernet wire. Don't forget to stick the SD card into the Pi's SD card slot. Power it up.</p>
 
-		<p>TODO: introduce to Terminal (Mac and Linux) and CMD (Win).</p>
+		<div class="mac linux">
+			<p>First try to ping the Pi by typing the following command in the Terminal: <code>ping 192.168.1.200</code>. Press <kbd>Return</kbd>. There should be response:</p>
+			<pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+		</div>
+		<div class="win">
+			<p>Type <code>ping 192.168.1.200</code> in the command prompt. There should be the following response:</p>
+			<pre>TODO: win ping response</pre>
+		</div>
 
-		<p>First try to ping the Pi by using the following command in the Terminal: <code>ping 192.168.1.200</code>. There should be response:</p>
+		<p>If that is true, let's try to connect to the Pi via SSH.</p>
 
-		<pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+		<div class="mac linux">
+			<p>Type <code>ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once promted for a password and press <kbd>Return</kbd>.</p>
+		</div>
+		<div class="win">
+			<p>Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
+		</div>
 
-		<p>If that is true, let's try to connect to the Pi via SSH. Use terminal for Mac and Linux, Putty for Win.</p>
+		<p>Now we're in. Let's change the real network settings.</p>
 
-		<pre>ssh pi@192.168.1.200</pre>
+		<p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window.</p>
 
-		<p>Enter passwoord: <code>raspberry</code>. Now we're in. Let's change the real network settings.</p>
-
-		<p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Write this in to the Terminal or Putty (whatever you use for communicating with the Pi):</p>
-
-		<pre>sudo nano /etc/network/interfaces</pre>
-
-		<p>Add (copy and paste most probably) the following content there:</p>
+		<p>Add the following content there:</p>
 
 		<pre>auto lo
 
@@ -176,16 +195,13 @@ gateway 192.168.1.1</pre>
 
 		<p>Press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save.</p>
 
-		<p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by issuing the following command in Terminal or Putty:</p>
+		<p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by typing <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span> and pressing <kbd>Return</kbd>.</p>
 
-		<pre>sudo nano /boot/cmdline.txt</pre>
+		<p>Delete the <code>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save the file.</p>
 
-		<p>Delete the <code>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save again.</p>
+		<p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
 
-		<p>Now, let's reboot our Pi by using the following command in Terminal or Putty by using the <code>sudo reboot</code> command.</p>
-
-		<p>Connect to your wireless network again if you did disconect from it earlier. In approximately 15 seconds you will be able to SSH to the Pi by using IP address <code>192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
-	</section>
+		<p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code>192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
 
 	<section>
 		<h2>Expanding partition</h2>
