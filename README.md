@@ -1,8 +1,6 @@
 RPi-Setup
 =========
 
-This repository contains instructions for fast-forward Raspberry Pi setup with Raspbian without a monitor and keyboard - just a network cable.
+This repository contains instructions for fast-forward Raspberry Pi setup with Raspbian without a monitor and keyboard.
 
-I've installed and reinstalled my Pi's a lot of times and each time there is something new to it. I will try to update this as soon as I discover something new to it.
-
-[Instructions](http://kr15h.github.io/RPi-Setup/index.html)
+[Launch](http://kr15h.github.io/RPi-Setup/index.html)
