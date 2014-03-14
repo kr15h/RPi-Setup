@@ -222,6 +222,16 @@ gateway 192.168.1.1</pre>
 		<p>Close file and save by pressing <kbd>Ctrl+X</kbd> and <kbd>Y</kbd> and then <kbd>Return</kbd>.</p>
 	</section>
 
+	<h2>Preventing the screen from going blank</h2>
+
+	<p>If you are using your Pi through SSH without an actual keyboard connected, the screen might go to sleep after some time as your Pi does not detect any activity. To prevent that, edit the <code>rc.local</code> file by opening it in the nano editor: <code>sudo nano /etc/rc.local</code></p>
+
+	<p>Add the following line just before the <code>exit 0</code> line:</p>
+
+	<pre>sh -c 'setterm -blank 0 -powersave off -powerdown 0 < /dev/console > /dev/console 2>&1'</pre>
+
+	<p>Hit <kbd>Ctrl+x</kbd> and <kbd>y</kbd> and <kbd>Retunr</kbd> to quit and save. Reboot your Pi: <code>sudo reboot</code>. Now the screen will stay awake.</p>
+
 	<section>
 		<h2>Startup scripts</h2>
 
