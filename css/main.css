@@ -1,3 +1,15 @@
 body {
 	padding-top: 50px;
 }
+
+#hardware-list li {
+  margin-bottom: 0.3em;
+}
+
+#hardware-list .lesser {
+  font-size: 90%;
+}
+
+#hardware-list b {
+  margin-right: 0.3em;
+}
