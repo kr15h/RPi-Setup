@@ -44,23 +44,28 @@
 
 	<div class="container">
 	
+
 		<h1>Raspberry Pi ASAP Setup Guide</h1>
 
 		<p class="lead">A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
 
+
+
 		<!-- SECTION -->
-		<h2>1. All the things you will need</h2>
+		<h2>1. Before starting get all the following</h2>
+
 
     <h3>Hardware</h3>
     <ul id="hardware-list">
       <li><b>Raspberry Pi model B.</b> <span class="lesser">We need an ethernet port, and the model A doesn't have one.</span></li>
       <li><b>A computer.</b> <span class="lesser">Linux, Mac and Windows are all fine.</span></li>
-      <li><b>High speed SD card.</b> <span class="lesser">At least 4 GB, preferably 10 class. This is were we will install the OS for the Pi.</span></li>
+      <li><b>High speed SD card.</b> <span class="lesser">This is were we will install the Operating system for the Pi. Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to choose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>. I usually go with SanDisk or Kingston.</span></li>
       <li><b>SD card port or external reader.</b> <span class="lesser">You need to be able to read / write on the SD card with your laptop.</span></li>
       <li><b>Power adapter for Raspberry Pi.</b> <span class="lesser">5V, 1–1.5A, most phone chargers with a <i>micro USB type B</i> plug are fine.</span></li>
       <li><b>Network cable.</b> <span class="lesser">Cat 6 ethernet cable, basically cables you have at home should be fine.</span></li>
       <li><b>Ethernet port or USB adapter.</b> <span class="lesser">You need to be able to connect your laptop to the raspberry Pi via ethernet.</span></li>
     </ul>
+
 
     <h3>Software</h3>
     <ul>
@@ -73,7 +78,14 @@
       <h4>SCP client</h4>
       <p>We will need to upload and download files to and from the Raspberry Pi. For this, we will use SCP (Secure CoPy or Secure Copy Protocol) which is built on top of the SSH protocol and allows secure transfer of files. Download <a href="https://filezilla-project.org">FileZilla</a>. It works on Mac, Linux and Windows. <span class="win">You might consider <a href="http://winscp.net">WinSCP</a> as your weapon of choice if you are using Windows.</span></p>
       </li>
+
+      <li>
+      <h4>Program to format SD card</h4>
+      <p><span class="mac win">Download <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. </span><span class="mac">You can use Mac Disk Utility, but SDFormatter is the recomended way.</span></p>
+      <span class="linux">Use <a href="http://gparted.org">GParted</a> to format your SD card to FAT32 file system.</span></p>
+      </li>
     </ul>
+
 
     <h3>Know-how</h3>
     <ul>
@@ -88,25 +100,32 @@
       </li>
     </ul>
 
+
+    <h3>A wireless Internet connection.</h3>
+    Yep ... you will need it for setting-up everything, and installing software on your Pi once it is ready.
+
+
+
 		<h2>2. Installing Raspbian</h2>
 
-		<p>You can download the most recent version of Raspbian <a href="http://www.raspberrypi.org/downloads">here</a>. Download and unarchive in your home directory.</p>
+		<p>Raspbian is the operating system that we are going to install on the Raspberry Pi. You can download the most recent version <a href="http://www.raspberrypi.org/downloads">here</a> and unarchive it. The archive contains only one file : a full image of the Raspbian system.</p>
 
-		<h3>Prepare SD card</h3>
 
-		<p>Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to choose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>. I usually go with SanDisk or Kingston.</p>
+		<h3>Formatting the SD card</h3>
 
-		<p>Once you've found a proper SD card, prepare it by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
+		<p>Before installing Raspbian, you must prepare your SD card by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
 
-		<p class="mac win">Download <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a> if you use Mac or Windows. <span class="mac">You can use Mac Disk Utility, but SDFormatter is the recomended way.</span></p>
+		<p class="mac win">Format the SD card to FAT32 file system using SDFormatter (which you should have installed if you followed from the beginning), <span class="mac">or Mac Disk Utility.</span></p>
 
-		<p class="linux">Use <a href="http://gparted.org">GParted</a> to format your SD card to FAT32 file system.</p>
+		<p class="linux">Use GParted to format your SD card to FAT32 file system.</p>
 
 		
-		<h3>Burn Rasbian on to the SD card</h3>
+		<h3>Finding out the device ID of the SD card.</h3>
 
 		<div class="mac">
-		<p>Open Terminal, type <code>diskutil list</code> and press <kbd>Return</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar as the following:</p>
+
+    <p>First, you must insert the SD card, and eject it by clicking on the "eject" icon in the finder.</p>
+		<p>Then, open your Terminal, type <code>diskutil list</code> and press <kbd>enter ↵</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
 
 		<pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -115,7 +134,7 @@
    2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
    3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3</pre>
 
-   		<p>Next - insert your SD card and issue the <code>diskutil list</code> command again. Press <kbd>Return</kbd> and this time you should get output similar to this:</p>
+   		<p>Next - insert your SD card and issue the <code>diskutil list</code> command again. Press <kbd>enter ↵</kbd> and this time you should get output similar to this:</p>
 
    		<pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -129,23 +148,28 @@
    1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
 </pre>
 		
-		<p>As you see, there is a new device - <code>/dev/disk1</code>. If you have more devices connected to your computer, the ID might look different. Try to find the ID that was not there before you inserted the SD card.</p>
+		<p>As you see, there is a new device - <code>/dev/disk1</code>. On your computer, the device ID might be different (e.g. if you have more devices connected). Try to find the ID that was not there before you inserted the SD card.</p>
 
-		<p>Now we have to navigate to the directory where our Raspbian image is saved. Let's assume that it is in our home directory (usually <code>/Users/you/</code>). To go to the home directory, type <code>cd ~</code> in the terminal window and press <kbd>Return</kbd> again. Check if the Raspbian image file is in the directory by writing the <code>ls</code> command and pressing <kbd>Return</kbd>.</p>
 
-		<p>A list of all files and folders in the directory should be output in the Terminal window. You should see the image file <code>2014-01-07-wheezy-raspbian.img</code> among them.</p>
+    <h3>Burning Raspbian on the SD card</h3>
 
-		<p>Unmount the SD card to be able to write the image by using the <code>diskutil unmount /dev/disk1</code> command.</p>
+		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to type <code>cd /Users/me/</code> and press <kbd>enter ↵</kbd>.
+
+    <p>Let's check that the image is there by typing <code>ls</code> and pressing <kbd>enter ↵</kbd>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
+
+		<p>Now let's burn this. Unmount the SD card by running the <code>diskutil unmount /dev/&lt;ID&gt;</code> command. Of course, replace <code>&lt;ID&gt;</code> with the device ID you found in the previous step.</p>
 
 		<p>Wait till the disk is unmounted and then continue with the most important part - overwritting the contents of the SD card with the image.</p>
 
-		<blockquote class="alert-danger"><p><b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong drive ID.</p></blockquote>
+		<blockquote class="alert-danger"><p><b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong device ID.</p></blockquote>
 
-		<pre>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/rdisk1 bs=1m</pre>
+		<pre>sudo dd if=&lt;image&gt; of=/dev/&lt;ID&gt; bs=1m</pre>
 
-		<p><code>if</code> is the input, <code>of</code> is the output and <code>bs</code> is the size of chunk of data that is being written to the output (the SD card, <code>/dev/rdisk1</code>) at a time.</p>
+		<p><code>if</code> is the input, <code>of</code> is the output and <code>bs</code> is the size of chunk of data that is being written to the output. Replace <code>&lt;image&gt;</code> by the name of your image file, and <code>&lt;ID&gt;</code> by the device ID of your SD card. For example, with the ID I found in previous step and the image file I have dowloaded, the command looks like the following :
+    <code>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/disk1 bs=1m</code>.
+    But be careful, as - once again - your device ID and image file might be different as mine.</p>
 
-		<p>Double check the <code>of=/dev/rdisk1</code> part and press <kbd>Return</kbd>. This process will some time. So go make a coffee. And a sandwich. You might be curious why the <code>r</code> before the <code>disk1</code>. Some people say it's faster. I believe.</p>
+		<p>Once you have double checked the ID, and image file name, execute the command. This process will take some time. So go make a coffee. And a sandwich. Don't worry if it seems to be idle. It isn't.</p>
 
 		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <code>ls</code> and <code>cd</code>), eject the SD card by using <code>diskutil eject /dev/disk1</code>. When the terminal has returned to it's normal state, you can remove your SD card.</p>
 		</div><!-- mac -->
@@ -158,9 +182,69 @@
 			<p>Linux instructions comming soon...</p>
 		</div>
 
-		<h2>Sharing your computer's internet connection with the Raspberry Pi</h2>
 
-		<p>The Raspbian Linux distribution strongly relies on software packages and repositories that can be accessed through the internet. It means that you do need an internet connection to be able to set up and work with the Raspberry Pi. In this step we will configure our personal computer to share it's internet connection with our Raspberry Pi via ethernet connection.</p>
+
+    <h2>3. Launching the Pi</h2>
+    
+    <h3>Assigning IP addresses</h3>
+
+    <p>In order to access the Raspberry Pi via ethernet, we will need to give it an IP address.</p>
+    <p>To do that, insert the SD card in the reader, and show the its contents. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
+
+    <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+    
+    <p>For example, after doing this, my <code>cmdline.txt</code> file looks like :</p>
+
+    <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+    <p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code> after we set our ethernet connections TCP/IP settings correctly.</p>
+    <p>Adjust your computer's network settings. Set the IP address to <code>192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless networks to make this work.</p>
+
+    <h3>Booting up - the first time</h3>
+    <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi before powering-it up. Plug-in the power adapter.</p>
+
+    <p>First try to ping the Pi by typing the following command in the Terminal: <code>ping 192.168.1.200</code>. Press <kbd>enter ↵</kbd>. There should be response:</p>
+    <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+
+    <p>If that is true, let's try to connect to the Pi via SSH.</p>
+
+    <div class="mac linux">
+      <p>Type <code>ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once promted for a password and press <kbd>enter ↵</kbd>.</p>
+    </div>
+    <div class="win">
+      <p>Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
+    </div>
+
+    <p>Now we're in. Let's change the real network settings.</p>
+
+    <p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window.</p>
+
+    <p>Add the following content there:</p>
+
+    <pre>auto lo
+
+iface lo inet loopback
+iface eth0 inet static
+
+address 192.168.1.200
+netmask 255.255.255.0
+gateway 192.168.1.1</pre>
+
+    <p>Press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save.</p>
+
+    <p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by typing <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span> and pressing <kbd>enter ↵</kbd>.</p>
+
+    <p>Delete the <code>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save the file.</p>
+
+    <p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
+
+    <p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code>192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
+
+
+
+		<h2>4. Sharing your computer's internet connection with the Raspberry Pi</h2>
+
+		<p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. In this step we will configure our computer to share it's internet connection with our the Pi via an ethernet cable.</p>
 
 		<div class="mac">
 			<p>TODO</p>
@@ -172,65 +256,6 @@
 			<p>TODO</p>
 		</div>
 
-		<h2>Assigning Raspberry Pi IP address</h2>
-		
-		<p>In order to access the Raspberry Pi for further configuration we will need to give it an initial IP address.</p>
-		<p>To do that, insert the SD card in the reader and go to the boot partition of it. There you will find a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
-
-		<pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-		
-		<p>so it looks like: </p>
-
-		<pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-
-		<p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code> after we set our ethernet connections TCP/IP settings correctly.</p>
-		<p>Adjust your computer's network settings. Set the IP address to <code>192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless networks to make it work.</p>
-
-		<h2>Booting up - the first time</h2>
-		<p>Connect your Raspberry Pi to the computer with an ethernet wire. Don't forget to stick the SD card into the Pi's SD card slot. Power it up.</p>
-
-		<div class="mac linux">
-			<p>First try to ping the Pi by typing the following command in the Terminal: <code>ping 192.168.1.200</code>. Press <kbd>Return</kbd>. There should be response:</p>
-			<pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-		</div>
-		<div class="win">
-			<p>Type <code>ping 192.168.1.200</code> in the command prompt. There should be the following response:</p>
-			<pre>TODO: win ping response</pre>
-		</div>
-
-		<p>If that is true, let's try to connect to the Pi via SSH.</p>
-
-		<div class="mac linux">
-			<p>Type <code>ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once promted for a password and press <kbd>Return</kbd>.</p>
-		</div>
-		<div class="win">
-			<p>Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
-		</div>
-
-		<p>Now we're in. Let's change the real network settings.</p>
-
-		<p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window.</p>
-
-		<p>Add the following content there:</p>
-
-		<pre>auto lo
-
-iface lo inet loopback
-iface eth0 inet static
-
-address 192.168.1.200
-netmask 255.255.255.0
-gateway 192.168.1.1</pre>
-
-		<p>Press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save.</p>
-
-		<p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by typing <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span> and pressing <kbd>Return</kbd>.</p>
-
-		<p>Delete the <code>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+Return</kbd> to save the file.</p>
-
-		<p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
-
-		<p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code>192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
 
 	<section>
 		<h2>Expanding partition</h2>
@@ -248,7 +273,7 @@ gateway 192.168.1.1</pre>
 
 		<pre>1:2345:respawn:/bin/login -f pi tty1 /dev/tty1 2>&1</pre>
 
-		<p>Close file and save by pressing <kbd>Ctrl+X</kbd> and <kbd>Y</kbd> and then <kbd>Return</kbd>.</p>
+		<p>Close file and save by pressing <kbd>Ctrl+X</kbd> and <kbd>Y</kbd> and then <kbd>enter ↵</kbd>.</p>
 	</section>
 
 	<h2>Preventing the screen from going blank</h2>
@@ -296,7 +321,7 @@ fi</pre>
 
 		<p>You can add your own scripts just after the <code># Your scripts here</code> line.</p>
 
-		<p>Close and save the file by using <kbd>Ctrl+X</kbd>, <kbd>y</kbd> and <kbd>Return</kbd>.</p>
+		<p>Close and save the file by using <kbd>Ctrl+X</kbd>, <kbd>y</kbd> and <kbd>enter ↵</kbd>.</p>
 	</section>
 	</div>
 

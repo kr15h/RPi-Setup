@@ -2,12 +2,12 @@ body {
 	padding-top: 50px;
 }
 
-#hardware-list li {
-  margin-bottom: 0.3em;
+ul {
+  list-style-type: circle;
 }
 
-#hardware-list .lesser {
-  font-size: 90%;
+#hardware-list li {
+  margin-bottom: 0.3em;
 }
 
 #hardware-list b {
