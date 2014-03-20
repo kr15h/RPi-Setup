@@ -187,7 +187,30 @@
     <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. In this step we will configure our computer to share it's internet connection with our the Pi via an ethernet cable.</p>
 
     <div class="mac">
-      <p>TODO</p>
+      <h3>Enabling Internet Sharing</h3>
+      <p>Go to <b>System Preferences</b>, click on <b>Sharing</b>. Select the <b>Internet Sharing</b> checkbox and choose <b>Wi-Fi</b> form the <b>Share your connection from</b> dropdown. Check the <b>Ethernet</b> checkbox in the <b>To computers using</b> field.</p>
+
+      <p>Now your Mac computer automatically assigns an IP address to whatever is connected to the computer's ethernet port unless a static IP address on the connected device is set.</p>
+
+      <p>With our Pi we will need to do just that - set a static IP address, but to do that we need to know a bit more about the network that the Mac computer is setting up to share the internet connection.</p>
+
+      <h3>Determining internet sharing subnet settings</h3>
+
+      <p>Open Terminal and type <code>ifconfig</code>. Press <kbd>enter ↵</kbd> and a list of enabled network devices and their properties should fill the screen. Search for the one that has <code>bridge</code> in front.</p>
+
+      <pre>bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+  options=23<RXCSUM,TXCSUM,TSO4>
+  ether 02:25:4b:3d:a7:64 
+  inet <b>192.168.2.1</b> netmask <b>0xffffff00</b> broadcast 192.168.2.255
+  ...</pre>
+
+      <p>We need to keep in mind the values that come after the <code>inet</code> keyword. <code>192.168.2.1</code> is the router (gateway) address and in this case it's your Mac. <code>0xffffff00</code> is the netmask that usually is expressed in numbers like this: <code>255.255.255.0</code>. To make things easier, <a href="http://www.pawprint.net/designresources/netmask-converter.php">here</a> is a table with the most common hex values for netmasks.</p>
+
+      <h3>Static IP address for the Pi</h3>
+
+      <p>If our gateway address is <code>192.168.2.1</code>, our static IP address can vary between <code>192.168.2.2</code> to <code>192.168.2.254</code>. If your gateway address is different, leave the first 3 numbers the same and add the last one in the range from 2 to 254.</p>
+
+
     </div>
     <div class="linux">
       <p>TODO</p>
