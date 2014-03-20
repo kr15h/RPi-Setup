@@ -244,27 +244,62 @@
     <p>Once the Pi will be running, we will connect to it from our laptop via SSH. In order to do this, we need to be able to access the Pi via ethernet, therefore we need to give it an IP address.</p>
     <p>To do that, insert the SD card in the reader, and with the file browser of your operating system browse the contents of the card. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
 
-    <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+    <div class="mac">
+      <pre>ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</pre>
+
+      <p>We chose the IP address <code>192.168.2.200</code> for the previously discovered gateway <code>192.168.2.1</code> of our internet sharing subnet with the netmask <code>255.255.255.0</code>.</p>
+
+      <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</pre>
+    </div>
+
+    <div class="win">
+      <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+      <p>Why this IP? TODO</p>
+
+      <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+    </div>
+
+    <div class="linux">
+      <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+      <p>Why this IP? TODO</p>
+
+      <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+    </div>
     
-    <p>For example, after doing this, my <code>cmdline.txt</code> file looks like :</p>
+    
 
-    <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+    <p>We will be able to access the Pi through network with the IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>.</p>
 
-    <p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code> after we set our ethernet connections TCP/IP settings correctly.</p>
-    <p>Now assign your computer a static IP address. <span class="mac">In mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the IP address to <code>192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless networks to make this work.</p>
+    <p>If you don't have an internet connection to share, you can assign your computer a static IP address. <span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the IP address to <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code class="mac">192.168.2.1</code><code class="win">192.168.1.1</code><code class="linux">192.168.1.1</code>. You may need to disconnect from any wireless networks to make this work.</p>
 
 
     <h3>Booting up - the first time</h3>
     <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi before powering-it up. Plug-in the Pi's power adapter.</p>
 
-    <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <b>ping</b>. Type <code>ping 192.168.1.200</code> and press <kbd>enter ↵</kbd>. There should be response:</p>
-    <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+    <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Type <code class="mac">ping 192.168.2.200</code><code class="win">ping 192.168.1.200</code><code class="linux">ping 192.168.1.200</code> and press <kbd>enter ↵</kbd>. There should be response:</p>
+    <div class="mac">
+      <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+    </div>
+    <div class="win">
+      <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+    </div>
+    <div class="linux">
+      <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+    </div>
 
     <p>If on the other hand it says:</p>
     <pre>Request timeout for icmp_seq 0</pre>
     <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to check as the Pi takes about 20 seconds to boot.</p>
 
-    <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Type <code>ssh pi@192.168.1.200</code> in the Terminal and press <kbd>enter ↵</kbd>. Enter <code>raspberry</code> once prompted for a password and press <kbd>enter ↵</kbd>.</p>
+    <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Type <code class="mac">ssh pi@192.168.2.200</code><code class="win">ssh pi@192.168.1.200</code><code class="linux">ssh pi@192.168.1.200</code> in the Terminal and press <kbd>enter ↵</kbd>. Enter <code>raspberry</code> once prompted for a password and press <kbd>enter ↵</kbd>.</p>
     <p class="win">Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
 
     <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
@@ -273,13 +308,23 @@
     <h3>Configuration</h3>
     <p>Ok, let's change the real network settings.</p>
 
-    <p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window.</p>
+    <p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window after you have successfully connected to the Pi via SSH.</p>
 
     <p><code>sudo</code> means that you are executing a command as administrator (or "root"), so basically you have every right. Be careful though, as it also means you can potentially harm your system.</p>
 
     <p>Add the following content there:</p>
+    <div class="mac">
+      <pre>auto lo
 
-    <pre>auto lo
+iface lo inet loopback
+iface eth0 inet static
+
+address 192.168.2.200
+netmask 255.255.255.0
+gateway 192.168.2.1</pre>
+    </div>
+    <div class="win">
+      <pre>auto lo
 
 iface lo inet loopback
 iface eth0 inet static
@@ -287,16 +332,27 @@ iface eth0 inet static
 address 192.168.1.200
 netmask 255.255.255.0
 gateway 192.168.1.1</pre>
+    </div>
+    <div class="linux">
+      <pre>auto lo
+
+iface lo inet loopback
+iface eth0 inet static
+
+address 192.168.1.200
+netmask 255.255.255.0
+gateway 192.168.1.1</pre>
+    </div>
 
     <p>Press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save.</p>
 
     <p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by typing <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span> and pressing <kbd>enter ↵</kbd>.</p>
 
-    <p>Delete the <code>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save the file.</p>
+    <p>Delete the <code class="mac">ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</code><code class="win">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code><code class="linux">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save the file.</p>
 
     <p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
 
-    <p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code>192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
+    <p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
 
     <h2>5. Configuring the Pi further</h2>
 
