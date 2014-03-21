@@ -105,7 +105,6 @@
     Yep ... you will need it for setting-up everything, and installing software on your Pi once it is ready.
 
 
-
 		<h2>2. Installing Raspbian</h2>
 
 		<p>Raspbian is the operating system that we are going to install on the Raspberry Pi. You can download the most recent version <a href="http://www.raspberrypi.org/downloads">here</a> and unarchive it. The archive contains only one file : a full image of the Raspbian system.</p>
@@ -171,7 +170,7 @@
 		<p>Once you have double checked the ID, and image file name, execute the command. This process will take some time. So go make a coffee. And a sandwich. Don't worry if it seems to be idle. It isn't.</p>
 
 		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <code>ls</code> and <code>cd</code>), eject the SD card by using <code>diskutil eject /dev/&lt;ID&gt;</code>. When the terminal has returned to it's normal state, you can remove your SD card.</p>
-		</div><!-- mac -->
+		</div><!-- /.mac -->
 
 		<div class="win">
 			<h3>Determining which device is my SD card</h3>
@@ -183,11 +182,11 @@
       <p>On Windows you need a new program for almost every new task you want to do. It is true in this case as well. To burn the Raspbian disk image to the SD card, we have to download a program called <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. It's main purpose is just that: to burn disk image files to actual disks, USB sticks, flash drives and SD cards.</p>
 
       <p>Download and install <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. Open it and choose the previously downloaded Raspbian image file (<code>2014-01-07-wheezy-raspbian.img</code>) as the input and the disk that represents your SD card. Press Burn and wait till the process finishes.</p>
-		</div><!-- win -->
+		</div><!-- /.win -->
 
 		<div class="linux">
 			<p>Linux instructions comming soon...</p>
-		</div>
+		</div><!-- /.linux -->
 
     <p>Don't eject the SD card yet.</p>
 
@@ -382,6 +381,8 @@ gateway 192.168.1.1</pre>
 
   	<pre>1:2345:respawn:/bin/login -f pi tty1 /dev/tty1 2>&1</pre>
 
+    <blockquote class="alert-info"><p><b>TIP:</b> Use keyboard arrow keys to navigate the text file. You won't see scrollbars in this kind of text editors and adjusting the cursor position with mouse won't do any good.</p></blockquote>
+
   	<p>Close file and save by pressing <kbd>Ctrl+X</kbd> and <kbd>Y</kbd> and then <kbd>enter ↵</kbd>.</p>
 
 
@@ -401,7 +402,7 @@ gateway 192.168.1.1</pre>
 		Starting a program on boot
 		<p>In <code>/home/pi</code> create an executable shell script called <code>startup.sh</code>:</p>
 
-	<pre>touch startup.sh
+    <pre>touch startup.sh
 chmod a+x startup.sh</pre>
 		
 		<p>Then open <code>.bashrc</code></p> 
@@ -411,6 +412,8 @@ chmod a+x startup.sh</pre>
 		<p>and add the following line at the end of the file:</p>
 
 		<pre>~/startup.sh</pre>
+
+    <p>Hit <kbd>Ctrl+x</kbd> and <kbd>y</kbd> and <kbd>Retunr</kbd> to quit and save.</p>
 
 		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
 
