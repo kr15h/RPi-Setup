@@ -115,19 +115,18 @@
 
 		<p>Before installing Raspbian, you must prepare your SD card by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
 
-		<p class="mac win">Format the SD card to FAT32 file system using SDFormatter (which you should have installed if you followed from the beginning), <span class="mac">or Mac Disk Utility.</span></p>
+		<p class="mac win">Format the SD card to FAT32 file system using <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a><span class="mac"> or Mac Disk Utility</span>.</p>
 
 		<p class="linux">Use GParted to format your SD card to FAT32 file system.</p>
-
 		
-		<h3>Finding out the device ID of the SD card.</h3>
+    <div class="mac">
+		  <h3>Finding out the device ID of the SD card.</h3>
 
-		<div class="mac">
+      <p>First, eject the SD card.</p>
+		  
+      <p>Then, open your Terminal, type <code>diskutil list</code> and press <kbd>enter ↵</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
 
-    <p>First, eject the SD card.</p>
-		<p>Then, open your Terminal, type <code>diskutil list</code> and press <kbd>enter ↵</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
-
-		<pre>/dev/disk0
+		  <pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:      GUID_partition_scheme                        *256.1 GB   disk0
    1:                        EFI EFI                     209.7 MB   disk0s1
@@ -142,7 +141,7 @@
    1:                        EFI EFI                     209.7 MB   disk0s1
    2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
    3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3
-/dev/disk1
+<b>/dev/disk1</b>
    #:                       TYPE NAME                    SIZE       IDENTIFIER
    0:     FDisk_partition_scheme                        *3.9 GB     disk1
    1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
@@ -155,7 +154,7 @@
 
 		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to type <code>cd /Users/me/</code> and press <kbd>enter ↵</kbd>.
 
-    <p>Let's check that the image is there by typing <code>ls</code> and pressing <kbd>enter ↵</kbd>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
+    <p>Let's check that if image is there by typing <code>ls</code> and pressing <kbd>enter ↵</kbd>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
 
 		<p>Now let's burn this. Unmount the SD card by running the <code>diskutil unmount /dev/&lt;ID&gt;</code> command. Of course, replace <code>&lt;ID&gt;</code> with the device ID you found in the previous step.</p>
 
@@ -175,12 +174,22 @@
 		</div><!-- mac -->
 
 		<div class="win">
-			<p>Windows instructions comming soon...</p>
+			<h3>Determining which device is my SD card</h3>
+      <p>First, eject your SD card from the card reader if it is there. Open the My Computer section/directory so you can see all the storage devices connected to your computer. You should see one or more devices with letters C, D, E...</p>
+
+      <p>Insert your SD card into the SD card reader of your computer. A new device should appear. Windows also takes care of automatically assigning a drive letter for it. Memorize that letter because we are going to need it in the next step.</p>
+
+      <h3>Burning the Raspbian image</h3>
+      <p>On Windows you need a new program for almost every new task you want to do. It is true in this case as well. To burn the Raspbian disk image to the SD card, we have to download a program called <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. It's main purpose is just that: to burn disk image files to actual disks, USB sticks, flash drives and SD cards.</p>
+
+      <p>Download and install <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. Open it and choose the previously downloaded Raspbian image file (<code>2014-01-07-wheezy-raspbian.img</code>) as the input and the disk that represents your SD card. Press Burn and wait till the process finishes.</p>
 		</div><!-- win -->
 
 		<div class="linux">
 			<p>Linux instructions comming soon...</p>
 		</div>
+
+    <p>Don't eject the SD card yet.</p>
 
     <h2>3. Sharing your computer's internet connection with the Raspberry Pi</h2>
 
