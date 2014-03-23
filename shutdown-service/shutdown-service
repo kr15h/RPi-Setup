@@ -1,0 +1,6 @@
+#! /bin/sh
+# /etc/init.d/shutdown-service
+
+python /home/pi/shutdown.py &
+
+exit 0
