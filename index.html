@@ -190,9 +190,15 @@
 
     <p>Don't eject the SD card yet.</p>
 
+
+
     <h2>3. Sharing your computer's internet connection with the Raspberry Pi</h2>
 
-    <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. In this step we will configure our computer to share it's internet connection with our the Pi via an ethernet cable.</p>
+    <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. How to do this is different with each operating system, but the baseline is the same.</p>
+
+    <p>Firstly, you must configure your laptop to share its Internet connection with the port to which the Pi is connected. The way your computer achieves this is by creating a separate network, whose gateway to Internet is the Ethernet port.</p>
+
+    <p>Secondly, as we will later give the Pi a static IP address and configure it to use the right gateway, you must also find out what is the address of that gateway.</p>
 
     <div class="mac">
       <h3>Enabling Internet Sharing</h3>
@@ -218,11 +224,56 @@
 
       <p>If our gateway address is <code>192.168.2.1</code>, our static IP address can vary between <code>192.168.2.2</code> to <code>192.168.2.254</code>. If your gateway address is different, leave the first 3 numbers the same and add the last one in the range from 2 to 254.</p>
 
+    </div>
+
+    <div class="linux">
+
+      <h3>Enabling Internet Sharing</h3>
+
+      <p>First go to <b>system settings</b> then <b>Network</b>. In order to be able to modify the options for the Ethernet port, you need it to be active. So for example, connect your Raspberry Pi to the port, and power it up. Then, open the <b>wired</b> tab, click on <b>options</b>, then <b>IPv4 settings</b> and change the <b>Method</b> to <b>"Shared to other computers"</b>, then save the changes. That's it! Your Internet is shared.</p>
+
+      <h3>Finding out the address of the gateway</h3>
+
+      <p>Open your terminal and run <code>ifconfig</code>. It will print a list of your network interfaces, including the Ethernet port on which Internet sharing is set-up. The IP address of that interface is the gateway address. This is what I get when executing the command :</p>
+      
+      <pre>
+<b>eth0</b>      Link encap:Ethernet  HWaddr 90:f6:21:7d:7a:66  
+          inet addr:<b>10.42.0.1</b>  Bcast:10.42.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::92e6:baff:fe7d:be66/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:3107 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:4570 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:383440 (383.4 KB)  TX bytes:662042 (662.0 KB)
+          Interrupt:43 Base address:0x6000 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:7198 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:7198 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:771195 (771.1 KB)  TX bytes:771195 (771.1 KB)
+
+wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b  
+          inet addr:192.168.0.102  Bcast:192.168.0.255  Mask:255.255.255.0
+          inet6 addr: fe80::225:d3ff:febd:1b5b/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+          RX packets:84839 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:36230 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:45789161 (45.7 MB)  TX bytes:8132670 (8.1 MB)
+      </pre>
+
+      <p>In my case it is easy to find the right interface, as there is only 2 physical interfaces and loopback. You can forget about loopback, this is not the interface you are looking for. In my case, interfaces are named conveniently so that it is easy to find which one is the wifi (<b>wlan0</b>), which one is the Ethernet port (<b>eth0</b>).</p>
+
+      <p>If on the other hand you cannot figure out by their name, you can run the command <code>sudo lshw -class network</code>. This will give you more detailed information about all the interfaces and help you to find the id of your Wifi and Ethernet interfaces.</p>
+
+      <p>When you have figured out which is your ethernet port, the address you are looking for is the numbers just after <b>inet addr:</b> as emphasized in the example output above.</p>
 
     </div>
-    <div class="linux">
-      <p>TODO</p>
-    </div>
+
     <div class="win">
       <h3>Enabling Internet Connection Sharing</h3>
       <ol>
@@ -249,11 +300,11 @@
 
     <h3>Assigning IP addresses</h3>
 
-    <p>Once the Pi will be running, we will connect to it from our laptop via SSH. In order to do this, we need to be able to access the Pi via ethernet, therefore we need to give it an IP address.</p>
+    <p>When the Pi will be running, we will connect to it from our laptop via SSH. In order to do this, we need to be able to access the Pi via ethernet, therefore we need to know its IP address. An obvious way to know it is by assigning it ourselves. So let's assign our Pi a known static IP address.</p>
     <p>To do that, insert the SD card in the reader, and with the file browser of your operating system browse the contents of the card. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
 
     <div class="mac">
-      <pre>ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</pre>
+      <pre>ip=<b>192.168.2.200</b>::<b>192.168.2.1</b>:255.255.255.0:rpi:eth0:off</pre>
 
       <p>We chose the IP address <code>192.168.2.200</code> for the previously discovered gateway <code>192.168.2.1</code> of our internet sharing subnet with the netmask <code>255.255.255.0</code>.</p>
 
@@ -273,20 +324,18 @@
     </div>
 
     <div class="linux">
-      <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+      <pre>ip=<b>10.42.0.2</b>::<b>10.42.0.1</b>:255.255.255.0:rpi:eth0:off</pre>
 
-      <p>Why this IP? TODO</p>
+      <p>In this line, the first series of numbers is the static IP we assign to the Pi, the second series of numbers is the gateway IP discovered in the previous step. The IP you assign to your Pi must be in the same network as the gateway. A safe choice for this is keeping the same first three numbers, and chosing a last number between 2 and 254.</p>
 
       <p>The <code>cmdline.txt</code> file should look like this now:</p>
 
-      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=10.42.0.2::10.42.0.1:255.255.255.0:rpi:eth0:off</pre>
     </div>
-    
-    
 
-    <p>We will be able to access the Pi through network with the IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>.</p>
+    <p>We will be able to access the Pi through network with the IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">10.42.0.1</code>.</p>
 
-    <p>If you don't have an internet connection to share, you can assign your computer a static IP address. <span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the IP address to <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code class="mac">192.168.2.1</code><code class="win">192.168.1.1</code><code class="linux">192.168.1.1</code>. You may need to disconnect from any wireless networks to make this work.</p>
+    <p>If you don't have an internet connection to share, you can assign your computer a static IP address, for example <code>192.168.1.1</code>. <span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the Pi's IP address to <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code class="mac">192.168.2.1</code><code class="win">192.168.1.1</code><code class="linux">192.168.1.1</code> (the static IP of your computer). You may need to disconnect from any wireless networks to make this work.</p>
 
 
     <h3>Booting up - the first time</h3>
