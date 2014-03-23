@@ -20,3 +20,9 @@ Installing is very simple. Copy `shutdown.py` to `/home/pi` and copy `shutdown-s
 ```
 root      1962  0.4  1.0   8864  4688 ?        S    13:57   0:00 python /home/pi/shutdown.py
 ```
+
+
+Examples
+---------
+
+If you use Pure Data, you can check-out the `pure-data-example.pd` file to see how to send the message to our shutdown service.

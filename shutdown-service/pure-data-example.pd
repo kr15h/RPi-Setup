@@ -1,0 +1,23 @@
+#N canvas 380 148 730 493 10;
+#X declare -lib mrpeach;
+#X msg 132 62 connect localhost 44555;
+#X obj 9 57 import mrpeach;
+#X obj 9 36 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 146 161 tcpsend;
+#X msg 178 92 send 115 104 117 116 100 111 119 110;
+#X obj 9 13 loadbang;
+#X msg 267 123 disconnect;
+#X obj 146 212 print connected;
+#X obj 178 187 route 1;
+#X text 130 9 Press this button to stop the Pi. It will connect \,
+and as soon as connected will send the message just below \, which
+says "shutdown" in raw bytes;
+#X connect 0 0 3 0;
+#X connect 2 0 1 0;
+#X connect 3 0 7 0;
+#X connect 3 0 8 0;
+#X connect 4 0 3 0;
+#X connect 5 0 2 0;
+#X connect 6 0 3 0;
+#X connect 8 0 4 0;
