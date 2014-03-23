@@ -123,7 +123,7 @@
 
       <p>First, eject the SD card.</p>
 		  
-      <p>Then, open your Terminal, type <code>diskutil list</code> and press <kbd>enter ↵</kbd> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
+      <p>Then, open your Terminal, and run <code>diskutil list</code> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
 
 		  <pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -132,7 +132,7 @@
    2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
    3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3</pre>
 
-   		<p>Next - insert your SD card and issue the <code>diskutil list</code> command again. Press <kbd>enter ↵</kbd> and this time you should get output similar to this:</p>
+   		<p>Next - insert your SD card and run the <code>diskutil list</code> command again. You should get output similar to this:</p>
 
    		<pre>/dev/disk0
    #:                       TYPE NAME                    SIZE       IDENTIFIER
@@ -151,9 +151,9 @@
 
     <h3>Burning Raspbian on the SD card</h3>
 
-		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to type <code>cd /Users/me/</code> and press <kbd>enter ↵</kbd>.
+		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to run <code>cd /Users/me/</code>.
 
-    <p>Let's check that if image is there by typing <code>ls</code> and pressing <kbd>enter ↵</kbd>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
+    <p>Let's check that the image is there by running <code>ls</code>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
 
 		<p>Now let's burn this. Unmount the SD card by running the <code>diskutil unmount /dev/&lt;ID&gt;</code> command. Of course, replace <code>&lt;ID&gt;</code> with the device ID you found in the previous step.</p>
 
@@ -210,7 +210,7 @@
 
       <h3>Determining internet sharing subnet settings</h3>
 
-      <p>Open Terminal and type <code>ifconfig</code>. Press <kbd>enter ↵</kbd> and a list of enabled network devices and their properties should fill the screen. Search for the one that has <code>bridge</code> in front.</p>
+      <p>Open Terminal and run <code>ifconfig</code>. A list of enabled network devices and their properties should fill the screen. Search for the one that has <code>bridge</code> in front.</p>
 
       <pre>bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
   options=23<RXCSUM,TXCSUM,TSO4>
@@ -341,7 +341,7 @@ wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b
     <h3>Booting up - the first time</h3>
     <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi before powering-it up. Plug-in the Pi's power adapter.</p>
 
-    <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Type <code class="mac">ping 192.168.2.200</code><code class="win">ping 192.168.1.200</code><code class="linux">ping 192.168.1.200</code> and press <kbd>enter ↵</kbd>. There should be response:</p>
+    <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Run <code class="mac">ping 192.168.2.200</code><code class="win">ping 192.168.1.200</code><code class="linux">ping 192.168.1.200</code>. There should be response:</p>
     <div class="mac">
       <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
     </div>
@@ -356,7 +356,7 @@ wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b
     <pre>Request timeout for icmp_seq 0</pre>
     <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to check as the Pi takes about 20 seconds to boot.</p>
 
-    <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Type <code class="mac">ssh pi@192.168.2.200</code><code class="win">ssh pi@192.168.1.200</code><code class="linux">ssh pi@192.168.1.200</code> in the Terminal and press <kbd>enter ↵</kbd>. Enter <code>raspberry</code> once prompted for a password and press <kbd>enter ↵</kbd>.</p>
+    <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Run <code class="mac">ssh pi@192.168.2.200</code><code class="win">ssh pi@192.168.1.200</code><code class="linux">ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once prompted for a password.</p>
     <p class="win">Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
 
     <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
@@ -401,11 +401,11 @@ netmask 255.255.255.0
 gateway 192.168.1.1</pre>
     </div>
 
-    <p>Press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save.</p>
+    <p>Save the file and exit.</p>
 
-    <p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by typing <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span> and pressing <kbd>enter ↵</kbd>.</p>
+    <p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by running <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span>.</p>
 
-    <p>Delete the <code class="mac">ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</code><code class="win">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code><code class="linux">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part and press <kbd>Ctrl+X</kbd> to exit and then <kbd>Y+enter ↵</kbd> to save the file.</p>
+    <p>Delete the <code class="mac">ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</code><code class="win">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code><code class="linux">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part, then save the file and exit.</p>
 
     <p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
 
@@ -432,9 +432,9 @@ Saving to: `index.html'
 
   	<h3>Expanding partition</h3>
 
-    <p>If your whole installation is on the SD card, the easiest way to go is to use the <code>raspi-config</code> tool. Type <code>sudo raspi-config</code> in the Raspberry Pi console ad press <kbd>enter ↵</kbd> to open the tool's interface.</p>
+    <p>If your whole installation is on the SD card, the easiest way to go is to use the <code>raspi-config</code> tool. Run <code>sudo raspi-config</code> in the Raspberry Pi console to open the tool's interface.</p>
 
-    <p>Select the appropriate menu item and press <kbd>enter ↵</kbd> again. You will have to reboot the Pi after this step.</p>
+    <p>Select the appropriate menu item and press enter. You will have to reboot the Pi after this step.</p>
 
 
   	<h3>Auto Login</h3>
@@ -449,7 +449,7 @@ Saving to: `index.html'
 
     <blockquote class="alert-info"><p><b>TIP:</b> Use keyboard arrow keys to navigate the text file. You won't see scrollbars in this kind of text editors and adjusting the cursor position with mouse won't do any good.</p></blockquote>
 
-  	<p>Close file and save by pressing <kbd>Ctrl+X</kbd> and <kbd>Y</kbd> and then <kbd>enter ↵</kbd>.</p>
+  	<p>Save the file and close.</p>
 
 
   	<h3>Preventing the screen from going blank</h3>
@@ -460,7 +460,7 @@ Saving to: `index.html'
 
   	<pre>sh -c 'setterm -blank 0 -powersave off -powerdown 0 < /dev/console > /dev/console 2>&1'</pre>
 
-  	<p>Hit <kbd>Ctrl+x</kbd> and <kbd>y</kbd> and <kbd>Retunr</kbd> to quit and save. Reboot your Pi: <code>sudo reboot</code>. Now the screen will stay awake.</p>
+  	<p>Save the file and exit. Reboot your Pi: <code>sudo reboot</code>. Now the screen will stay awake.</p>
 
 
 		<h3>Startup scripts</h3>
@@ -479,7 +479,7 @@ chmod a+x startup.sh</pre>
 
 		<pre>~/startup.sh</pre>
 
-    <p>Hit <kbd>Ctrl+x</kbd> and <kbd>y</kbd> and <kbd>Retunr</kbd> to quit and save.</p>
+    <p>Save the file and exit.</p>
 
 		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
 
@@ -497,9 +497,7 @@ else
 	echo "SSH connection, nothing to be launched.";
 fi</pre>
 
-		<p>You can add your own scripts just after the <code># Your scripts here</code> line.</p>
-
-		<p>Close and save the file by using <kbd>Ctrl+X</kbd>, <kbd>y</kbd> and <kbd>enter ↵</kbd>.</p>
+		<p>You can add your own scripts just after the <code># Your scripts here</code> line. When you are done, save the file and exit.</p>
 
 	</div>
 
