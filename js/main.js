@@ -1,57 +1,36 @@
-$(document).ready( function(){
+$(function(){
 	// switch to client OS automatically
 	var os = $.client.os;
+
 	// show active OS content only
 	if ( os == "Mac" || os == "Win" || os == "Linux" ) {
-		// hide all and show only OS content
 		hideAllOS();
 		showOS(os);
-		// activate OS item in the navbar
-		$(".nav li").each( function(){
-			if ( $(this).find("a").text() == os ) {
-				$(".nav li").removeClass("active");
-				$(this).addClass("active");
-			}
-		});
+
+	// If not know OS, put windows as default
+	} else {
+		hideAllOS();
+		showOS('Win');
 	}
 	
-	// show OS feature on click
+	// show OS content on click
 	$(".nav a").click( function(){
-		// deactivate all parent li's 
-		$(".nav li").removeClass("active");
-		// activate this a element's parent li
-		$(this).parent().addClass("active");
-		// hide all OS specific content
 		hideAllOS();
-		// show depending on choice
-		var choice = $(this).text();
-		showOS(choice);
+		showOS($(this).text());
 	});
 });
 
 var hideAllOS = function(){
-	$(".mac").css("display", "none");
-	$(".win").css("display", "none");
-	$(".linux").css("display", "none");
+	$(".mac").hide();
+	$(".win").hide();
+	$(".linux").hide();
+	$(".nav li").removeClass("active");
 }
 
-var showOS = function(os){
-	var selector = "";
-	switch(os){
-		case "Mac": selector = ".mac"; break;
-		case "Win": selector = ".win"; break;
-		case "Linux": selector = ".linux"; break;
-		default: break;
-	}
-	if (selector != "") {
-		$(selector).each( function(){
-			var t = $(this)[0].tagName.toLowerCase();
-			if ( t == "p" || t == "div" || t == "ul" || t == "ol" ) {
-				$(this).css("display", "block");
-			} else {
-				$(this).css("display", "inline");
-			}
-		});
-	}
+var showOS = function(os) {
+	var selector = { "Mac": ".mac", "Win": ".win", "Linux": ".linux" }[os];
+	if (!selector) throw new Error('unknown OS');
+	$(selector + '-nav').addClass("active");
+	$(selector).show();
 }
 
