@@ -440,7 +440,7 @@ Saving to: `index.html'
 
 
 
-    <!--_______________ SECTION 3 _______________-->
+    <!--_______________ SECTION 5 _______________-->
     <h2>5. Configuring the Pi further</h2>
 
   	<h3>Expanding partition</h3>
@@ -512,6 +512,33 @@ fi</pre>
 
 		<p>You can add your own scripts just after the <code># Your scripts here</code> line. When you are done, save the file and exit.</p>
 
+
+
+    <!--_______________ SECTION 6 _______________-->
+    <h2>6. Useful tips</h2>
+
+    <h3>Getting a graphical interface for programs running on the Pi</h3>
+
+    <p>Even when connecting through SSH, it is still possible to get graphical user interface (also called "GUI") for many programs. This is achieved by using a technique known as "X forwarding". The program runs on the Pi, but forwards its graphical output to your own laptop. On your laptop you need to have a server that interprets those commands.</p>
+
+    <div class="linux mac">
+      <p class="linux">On Linux, X is the normal way to display GUIs. Therefore you have nothing extra to install.</p>
+
+      <p class="mac">First, you should install <a href="http://xquartz.macosforge.org/landing/">XQuartz</a>, which is a X11 server for mac OS.</p>
+
+      <p>Connect to your Pi through SSH, but add the <code>-X</code> option. For example <code>ssh -X pi@192.168.2.200</code></p>
+    </div>
+
+    <div class="win">
+      <p>There are many programs that allow you to connect through SSH with X forwarding. We recommend you to use <a href="http://mobaxterm.mobatek.net/">MobaXterm</a>. It is a good all-in-one solution for working through SSH. You can connect, save sessions, transfer files very easily, and also enable X forwarding to get GUI of programs running on the Pi.</p>
+
+      <p>To connect, click on "session", then go to "SSH" and type the IP address of your Pi. That's all there is to it. X forwarding should be enabled by default.</p>
+    </div>  
+
+    <p>Once you have successfuly opened a connection, you can test that X forwarding works by opening a program that has a GUI on your Pi. For example, try to open "leafpad" by running <code>leafpad</code> in the terminal. Leafpad is a simple text editor, and if everything works fine, you should see it open on your laptop.</p>
+
+
+    <!--_______________ END CONTAINER _______________-->
 	</div>
 
 	<script src="js/jquery-1.11.0.min.js"></script>
