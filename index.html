@@ -51,7 +51,7 @@
 
 
 
-		<!-- SECTION -->
+		<!--_______________ SECTION 1 _______________-->
 		<h2>1. Before starting get all the following</h2>
 
 
@@ -105,6 +105,8 @@
     Yep ... you will need it for setting-up everything, and installing software on your Pi once it is ready.
 
 
+
+    <!--_______________ SECTION 2 _______________-->
 		<h2>2. Installing Raspbian</h2>
 
 		<p>Raspbian is the operating system that we are going to install on the Raspberry Pi. You can download the most recent version <a href="http://downloads.raspberrypi.org/raspbian_latest">here</a> and unarchive it. The archive contains only one file : a full image of the Raspbian system.</p>
@@ -192,16 +194,18 @@
 
 
 
+    <!--_______________ SECTION 3 _______________-->
     <h2>3. Sharing your computer's internet connection with the Raspberry Pi</h2>
 
     <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. How to do this is different with each operating system, but the baseline is the same.</p>
 
-    <p>Firstly, you must configure your laptop to share its Internet connection with the port to which the Pi is connected. The way your computer achieves this is by creating a separate network, whose gateway to Internet is the Ethernet port.</p>
+    <p>Firstly, you must configure your laptop to share its Internet connection with the port to which the Pi is connected. The way your computer achieves this is by creating a separate network which has an Internet access.</p>
 
-    <p>Secondly, as we will later give the Pi a static IP address and configure it to use the right gateway, you must also find out what is the address of that gateway.</p>
+    <p>Secondly, we will connect the Pi to that network, by assigning it a static IP address. Therefore, we also need to discover what is the address of that network.</p>
 
-    <div class="mac">
-      <h3>Enabling Internet Sharing</h3>
+    <h3>Enabling Internet Sharing</h3>
+
+    <div class="mac">      
       <p>Go to <b>System Preferences</b>, click on <b>Sharing</b>. Select the <b>Internet Sharing</b> checkbox and choose <b>Wi-Fi</b> form the <b>Share your connection from</b> dropdown. Check the <b>Ethernet</b> checkbox in the <b>To computers using</b> field.</p>
 
       <p>Now your Mac computer automatically assigns an IP address to whatever is connected to the computer's ethernet port unless a static IP address on the connected device is set.</p>
@@ -227,9 +231,6 @@
     </div>
 
     <div class="linux">
-
-      <h3>Enabling Internet Sharing</h3>
-
       <p>First go to <b>system settings</b> then <b>Network</b>. In order to be able to modify the options for the Ethernet port, you need it to be active. So for example, connect your Raspberry Pi to the port, and power it up. Then, open the <b>wired</b> tab, click on <b>options</b>, then <b>IPv4 settings</b> and change the <b>Method</b> to <b>"Shared to other computers"</b>, then save the changes. That's it! Your Internet is shared.</p>
 
       <h3>Finding out the address of the gateway</h3>
@@ -275,7 +276,6 @@ wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b
     </div>
 
     <div class="win">
-      <h3>Enabling Internet Connection Sharing</h3>
       <ol>
         <li>Click the <b>Start</b> button. Click the <b>Control Panel</b> item. In the search box type <code>adapter</code> and then, under <b>Network and Sharing Center</b>, click <b>View network connections</b>.</li>
 
@@ -295,8 +295,20 @@ wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b
       <p>References: <a href="http://windows.microsoft.com/en-us/windows/set-internet-connection-sharing#1TC=windows-7">Microsoft</a></p>
     </div>
 
-    <h2>4. Launching the Pi</h2>
-    
+    <h3>Connecting the Pi to a router</h3>
+
+    <p><b>If you've tried everything and cannot share Internet with your Pi</b>, but you have the possibility to connect the Pi to the router, <b>and you can connect to the admin interface of the router</b> there is still hope.</p>
+
+    <p>First you will need to restore the defaults. Remove all the network configuration that you might have added in <code>cmdlint.txt</code> or in <code>/etc/network/interfaces</code>.</p>
+
+    <p>Then connect your Pi to the router with an Ethernet wire. If everything works fine, the router should now assign an IP address to your Pi automatically. The only issue is that you don't know what that IP address is! By chance, in most of the routers, you can see a list of connected devices and their IP addresses by connecting to the admin interface of the router. So let's do this.</p>
+
+    <p>First, you need to discover the IP address of your router. It is normally your own IP address, but replacing the last number by <code>1</code>. For example if your IP address is <code>192.168.1.123</code>, your router's IP address is <code>192.168.1.1</code>. Then, open a web browser and type the IP address of the router in the address bar. You should then be prompted for a password and user name. If you don't know what they are, ask the administrator of the network. If it is your own router and you never changed the password, there should be an indication of what is the default password in your router's user manual.</b>
+
+    <p>Once you are connected to your router, dig in the menu, looking for the list of connected clients. Interfaces for all vendors are completely different. So the only advice I can give you is to look for a <b>DHCP</b> menu. When you have found the address of your Pi, you can just connect to it through SSH. The Pi should now have Internet connection.</p>
+
+    <!--_______________ SECTION 4 _______________-->
+    <h2>4. Launching the Pi</h2>    
 
     <h3>Assigning IP addresses</h3>
 
@@ -428,6 +440,7 @@ Saving to: `index.html'
 
 
 
+    <!--_______________ SECTION 3 _______________-->
     <h2>5. Configuring the Pi further</h2>
 
   	<h3>Expanding partition</h3>
