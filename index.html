@@ -22,524 +22,532 @@
 
 <body>
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Choose your OS</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="mac-nav" ><a href="#">Mac</a></li>
-            <li class="win-nav active"><a href="#">Win</a></li>
-            <li class="linux-nav" ><a href="#">Linux</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Choose your OS</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li class="mac-nav" ><a href="#">Mac</a></li>
+          <li class="win-nav active"><a href="#">Win</a></li>
+          <li class="linux-nav" ><a href="#">Linux</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+
+	<div class="container-fluid"><div class="row">
+	
+    <div class="col-md-4">
+      <div id="affix" class="col-md-4" data-clampedwidth=".myParent" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
+        <ul><!--Populated automatically--></ul>
       </div>
     </div>
 
-	<div class="container">
-	
+    <div class="col-md-8">
+  		<h1>Raspberry Pi ASAP Setup Guide</h1>
 
-		<h1>Raspberry Pi ASAP Setup Guide</h1>
-
-		<p class="lead">A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
+  		<p class="lead">A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
 
 
 
-		<!--_______________ SECTION 1 _______________-->
-		<h2>1. Before starting get all the following</h2>
+  		<!--_______________ SECTION 1 _______________-->
+  		<h2>1. Before starting get all the following</h2>
 
 
-    <h3>Hardware</h3>
-    <ul id="hardware-list">
-      <li><b>Raspberry Pi model B.</b> <span class="lesser">We need an ethernet port, and the model A doesn't have one.</span></li>
-      <li><b>A computer.</b> <span class="lesser">Linux, Mac and Windows are all fine.</span></li>
-      <li><b>High speed SD card.</b> <span class="lesser">This is were we will install the Operating system for the Pi. Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to choose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>.</span></li>
-      <li><b>SD card port or external reader.</b> <span class="lesser">You need to be able to read / write on the SD card with your laptop.</span></li>
-      <li><b>Power adapter for Raspberry Pi.</b> <span class="lesser">5V, 1–1.5A, most phone chargers with a <i>micro USB type B</i> plug are fine.</span></li>
-      <li><b>Network cable.</b> <span class="lesser">Cat 6 ethernet cable, basically cables you have at home should be fine.</span></li>
-      <li><b>Ethernet port or USB adapter.</b> <span class="lesser">You need to be able to connect your laptop to the raspberry Pi via ethernet.</span></li>
-    </ul>
+      <h3>Hardware</h3>
+      <ul id="hardware-list">
+        <li><b>Raspberry Pi model B.</b> <span class="lesser">We need an ethernet port, and the model A doesn't have one.</span></li>
+        <li><b>A computer.</b> <span class="lesser">Linux, Mac and Windows are all fine.</span></li>
+        <li><b>High speed SD card.</b> <span class="lesser">This is were we will install the Operating system for the Pi. Try to find a proper SD card for the job. It should be at least with 4 GB capacity. Class 4 to 10 have been working allright for me so far. It is better to choose one with a higher class number. There is a list of SD cards that have been tested with the Raspberry Pi <a href="http://elinux.org/RPi_SD_cards">here</a>.</span></li>
+        <li><b>SD card port or external reader.</b> <span class="lesser">You need to be able to read / write on the SD card with your laptop.</span></li>
+        <li><b>Power adapter for Raspberry Pi.</b> <span class="lesser">5V, 1–1.5A, most phone chargers with a <i>micro USB type B</i> plug are fine.</span></li>
+        <li><b>Network cable.</b> <span class="lesser">Cat 6 ethernet cable, basically cables you have at home should be fine.</span></li>
+        <li><b>Ethernet port or USB adapter.</b> <span class="lesser">You need to be able to connect your laptop to the raspberry Pi via ethernet.</span></li>
+      </ul>
 
 
-    <h3>Software</h3>
-    <ul>
-      <li>
-      <h4>SSH client</h4>
-  		<p>We will be using SSH a lot to communicate with the Pi form our laptop. SSH (Secure SHell) is a secure network protocol that allows to control other computers over network. <span class="mac linux">There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH without any issues.</span><span class="win">If you are using Windows, download <a href="http://www.putty.org">Putty</a> for using it as your SSH client.</span></p>
-      </li>
+      <h3>Software</h3>
+      <ul>
+        <li>
+        <h4>SSH client</h4>
+    		<p>We will be using SSH a lot to communicate with the Pi form our laptop. SSH (Secure SHell) is a secure network protocol that allows to control other computers over network. <span class="mac linux">There is no problem with a SSH client on Mac or Linux - Terminal can handle SSH without any issues.</span><span class="win">If you are using Windows, download <a href="http://www.putty.org">Putty</a> for using it as your SSH client.</span></p>
+        </li>
 
-      <li>
-      <h4>SCP client</h4>
-      <p>We will need to upload and download files to and from the Raspberry Pi. For this, we will use SCP (Secure CoPy or Secure Copy Protocol) which is built on top of the SSH protocol and allows secure transfer of files. Download <a href="https://filezilla-project.org">FileZilla</a>. It works on Mac, Linux and Windows. <span class="win">You might consider <a href="http://winscp.net">WinSCP</a> as your weapon of choice if you are using Windows.</span></p>
-      </li>
+        <li>
+        <h4>SCP client</h4>
+        <p>We will need to upload and download files to and from the Raspberry Pi. For this, we will use SCP (Secure CoPy or Secure Copy Protocol) which is built on top of the SSH protocol and allows secure transfer of files. Download <a href="https://filezilla-project.org">FileZilla</a>. It works on Mac, Linux and Windows. <span class="win">You might consider <a href="http://winscp.net">WinSCP</a> as your weapon of choice if you are using Windows.</span></p>
+        </li>
 
-      <li>
-      <h4>Program to format SD card</h4>
-      <p><span class="mac win">Download <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. </span><span class="mac">You can use Mac Disk Utility, but SDFormatter is the recomended way.</span></p>
-      <span class="linux">Use <a href="http://gparted.org">GParted</a> to format your SD card to FAT32 file system.</span></p>
-      </li>
-    </ul>
-
-
-    <h3>Know-how</h3>
-    <ul>
-      <li>
-      <h4>Shell / command-line interpreter</h4>
-		  <p>Basic knowledge of shell and <a href="http://www.johnstowers.co.nz/blog/pages/bash-cheat-sheet.html">shell scripting</a> will be useful as we will be using the shell more than once.</p>
-      </li>
-
-      <li>
-      <h4>Nano</h4>
-      <p>In a shell, to edit a file you need to use command line text-editing tools like <a href="http://www.tuxradar.com/content/text-editing-nano-made-easy">nano</a>.</p>
-      </li>
-    </ul>
+        <li>
+        <h4>Program to format SD card</h4>
+        <p><span class="mac win">Download <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a>. </span><span class="mac">You can use Mac Disk Utility, but SDFormatter is the recomended way.</span></p>
+        <span class="linux">Use <a href="http://gparted.org">GParted</a> to format your SD card to FAT32 file system.</span></p>
+        </li>
+      </ul>
 
 
-    <h3>A wireless Internet connection.</h3>
-    Yep ... you will need it for setting-up everything, and installing software on your Pi once it is ready.
+      <h3>Know-how</h3>
+      <ul>
+        <li>
+        <h4>Shell / command-line interpreter</h4>
+  		  <p>Basic knowledge of shell and <a href="http://www.johnstowers.co.nz/blog/pages/bash-cheat-sheet.html">shell scripting</a> will be useful as we will be using the shell more than once.</p>
+        </li>
+
+        <li>
+        <h4>Nano</h4>
+        <p>In a shell, to edit a file you need to use command line text-editing tools like <a href="http://www.tuxradar.com/content/text-editing-nano-made-easy">nano</a>.</p>
+        </li>
+      </ul>
 
 
-
-    <!--_______________ SECTION 2 _______________-->
-		<h2>2. Installing Raspbian</h2>
-
-		<p>Raspbian is the operating system that we are going to install on the Raspberry Pi. You can download the most recent version <a href="http://downloads.raspberrypi.org/raspbian_latest">here</a> and unarchive it. The archive contains only one file : a full image of the Raspbian system.</p>
-
-
-		<h3>Formatting the SD card</h3>
-
-		<p>Before installing Raspbian, you must prepare your SD card by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
-
-		<p class="mac win">Format the SD card to FAT32 file system using <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a><span class="mac"> or Mac Disk Utility</span>.</p>
-
-		<p class="linux">Use GParted to format your SD card to FAT32 file system.</p>
-		
-    <div class="mac">
-		  <h3>Finding out the device ID of the SD card.</h3>
-
-      <p>First, eject the SD card.</p>
-		  
-      <p>Then, open your Terminal, and run <code>diskutil list</code> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
-
-		  <pre>/dev/disk0
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      GUID_partition_scheme                        *256.1 GB   disk0
-   1:                        EFI EFI                     209.7 MB   disk0s1
-   2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
-   3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3</pre>
-
-   		<p>Next - insert your SD card and run the <code>diskutil list</code> command again. You should get output similar to this:</p>
-
-   		<pre>/dev/disk0
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:      GUID_partition_scheme                        *256.1 GB   disk0
-   1:                        EFI EFI                     209.7 MB   disk0s1
-   2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
-   3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3
-<b>/dev/disk1</b>
-   #:                       TYPE NAME                    SIZE       IDENTIFIER
-   0:     FDisk_partition_scheme                        *3.9 GB     disk1
-   1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
-</pre>
-		
-		<p>As you see, there is a new device - <code>/dev/disk1</code>. On your computer, the device ID might be different (e.g. if you have more devices connected). <b>Try to find the ID that was not there before you inserted the SD card</b>.</p>
-
-
-    <h3>Burning Raspbian on the SD card</h3>
-
-		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to run <code>cd /Users/me/</code>.
-
-    <p>Let's check that the image is there by running <code>ls</code>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
-
-		<p>Now let's burn this. Unmount the SD card by running the <code>diskutil unmount /dev/&lt;ID&gt;</code> command. Of course, replace <code>&lt;ID&gt;</code> with the device ID you found in the previous step.</p>
-
-		<p>Wait till the disk is unmounted and then continue with the most important part - overwritting the contents of the SD card with the image.</p>
-
-		<blockquote class="alert-danger"><p><b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong device ID.</p></blockquote>
-
-		<pre>sudo dd if=&lt;image&gt; of=/dev/&lt;ID&gt; bs=1m</pre>
-
-		<p><code>if</code> is the input, <code>of</code> is the output and <code>bs</code> is the size of chunk of data that is being written to the output. Replace <code>&lt;image&gt;</code> by the name of your image file, and <code>&lt;ID&gt;</code> by the device ID of your SD card. For example, with the ID I found in previous step and the image file I have dowloaded, the command looks like the following :
-    <code>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/disk1 bs=1m</code>.
-    But be careful, as - once again - <b>your device ID and image file might be different than mine</b>.</p>
-
-		<p>Once you have double checked the ID, and image file name, execute the command. This process will take some time. So go make a coffee. And a sandwich. Don't worry if it seems to be idle. It isn't.</p>
-
-		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <code>ls</code> and <code>cd</code>), eject the SD card by using <code>diskutil eject /dev/&lt;ID&gt;</code>. When the terminal has returned to it's normal state, you can remove your SD card.</p>
-		</div><!-- /.mac -->
-
-		<div class="win">
-			<h3>Determining which device is my SD card</h3>
-      <p>First, eject your SD card from the card reader if it is there. Open the My Computer section/directory so you can see all the storage devices connected to your computer. You should see one or more devices with letters C, D, E...</p>
-
-      <p>Insert your SD card into the SD card reader of your computer. A new device should appear. Windows also takes care of automatically assigning a drive letter for it. Memorize that letter because we are going to need it in the next step.</p>
-
-      <h3>Burning the Raspbian image</h3>
-      <p>On Windows you need a new program for almost every new task you want to do. It is true in this case as well. To burn the Raspbian disk image to the SD card, we have to download a program called <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. It's main purpose is just that: to burn disk image files to actual disks, USB sticks, flash drives and SD cards.</p>
-
-      <p>Download and install <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. Open it and choose the previously downloaded Raspbian image file (<code>2014-01-07-wheezy-raspbian.img</code>) as the input and the disk that represents your SD card. Press Burn and wait till the process finishes.</p>
-		</div><!-- /.win -->
-
-		<div class="linux">
-			<p>Linux instructions comming soon...</p>
-		</div><!-- /.linux -->
-
-    <p>Don't eject the SD card yet.</p>
+      <h3>A wireless Internet connection.</h3>
+      Yep ... you will need it for setting-up everything, and installing software on your Pi once it is ready.
 
 
 
-    <!--_______________ SECTION 3 _______________-->
-    <h2>3. Sharing your computer's internet connection with the Raspberry Pi</h2>
+      <!--_______________ SECTION 2 _______________-->
+  		<h2>2. Installing Raspbian</h2>
 
-    <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. How to do this is different with each operating system, but the baseline is the same.</p>
+  		<p>Raspbian is the operating system that we are going to install on the Raspberry Pi. You can download the most recent version <a href="http://downloads.raspberrypi.org/raspbian_latest">here</a> and unarchive it. The archive contains only one file : a full image of the Raspbian system.</p>
 
-    <p>Firstly, you must configure your laptop to share its Internet connection with the port to which the Pi is connected. The way your computer achieves this is by creating a separate network which has an Internet access.</p>
 
-    <p>Secondly, we will connect the Pi to that network, by assigning it a static IP address. Therefore, we also need to discover what is the address of that network.</p>
+  		<h3>Formatting the SD card</h3>
 
-    <h3>Enabling Internet Sharing</h3>
+  		<p>Before installing Raspbian, you must prepare your SD card by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
 
-    <div class="mac">      
-      <p>Go to <b>System Preferences</b>, click on <b>Sharing</b>. Select the <b>Internet Sharing</b> checkbox and choose <b>Wi-Fi</b> form the <b>Share your connection from</b> dropdown. Check the <b>Ethernet</b> checkbox in the <b>To computers using</b> field.</p>
+  		<p class="mac win">Format the SD card to FAT32 file system using <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a><span class="mac"> or Mac Disk Utility</span>.</p>
 
-      <p>Now your Mac computer automatically assigns an IP address to whatever is connected to the computer's ethernet port unless a static IP address on the connected device is set.</p>
+  		<p class="linux">Use GParted to format your SD card to FAT32 file system.</p>
+  		
+      <div class="mac">
+  		  <h3>Finding out the device ID of the SD card.</h3>
 
-      <p>With our Pi we will need to do just that - set a static IP address, but to do that we need to know a bit more about the network that the Mac computer is setting up to share the internet connection.</p>
+        <p>First, eject the SD card.</p>
+  		  
+        <p>Then, open your Terminal, and run <code>diskutil list</code> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
 
-      <h3>Determining internet sharing subnet settings</h3>
+  		  <pre>/dev/disk0
+     #:                       TYPE NAME                    SIZE       IDENTIFIER
+     0:      GUID_partition_scheme                        *256.1 GB   disk0
+     1:                        EFI EFI                     209.7 MB   disk0s1
+     2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
+     3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3</pre>
 
-      <p>Open Terminal and run <code>ifconfig</code>. A list of enabled network devices and their properties should fill the screen. Search for the one that has <code>bridge</code> in front.</p>
+     		<p>Next - insert your SD card and run the <code>diskutil list</code> command again. You should get output similar to this:</p>
 
-      <pre>bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
-  options=23<RXCSUM,TXCSUM,TSO4>
-  ether 02:25:4b:3d:a7:64 
-  inet <b>192.168.2.1</b> netmask <b>0xffffff00</b> broadcast 192.168.2.255
-  ...</pre>
+     		<pre>/dev/disk0
+     #:                       TYPE NAME                    SIZE       IDENTIFIER
+     0:      GUID_partition_scheme                        *256.1 GB   disk0
+     1:                        EFI EFI                     209.7 MB   disk0s1
+     2:                  Apple_HFS Macintosh HD            255.2 GB   disk0s2
+     3:                 Apple_Boot Recovery HD             650.0 MB   disk0s3
+  <b>/dev/disk1</b>
+     #:                       TYPE NAME                    SIZE       IDENTIFIER
+     0:     FDisk_partition_scheme                        *3.9 GB     disk1
+     1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
+  </pre>
+  		
+  		<p>As you see, there is a new device - <code>/dev/disk1</code>. On your computer, the device ID might be different (e.g. if you have more devices connected). <b>Try to find the ID that was not there before you inserted the SD card</b>.</p>
 
-      <p>We need to keep in mind the values that come after the <code>inet</code> keyword. <code>192.168.2.1</code> is the router (gateway) address and in this case it's your Mac. <code>0xffffff00</code> is the netmask that usually is expressed in numbers like this: <code>255.255.255.0</code>. To make things easier, <a href="http://www.pawprint.net/designresources/netmask-converter.php">here</a> is a table with the most common hex values for netmasks.</p>
 
-      <h3>Static IP address for the Pi</h3>
+      <h3>Burning Raspbian on the SD card</h3>
 
-      <p>If our gateway address is <code>192.168.2.1</code>, our static IP address can vary between <code>192.168.2.2</code> to <code>192.168.2.254</code>. If your gateway address is different, leave the first 3 numbers the same and add the last one in the range from 2 to 254.</p>
+  		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to run <code>cd /Users/me/</code>.
 
+      <p>Let's check that the image is there by running <code>ls</code>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
+
+  		<p>Now let's burn this. Unmount the SD card by running the <code>diskutil unmount /dev/&lt;ID&gt;</code> command. Of course, replace <code>&lt;ID&gt;</code> with the device ID you found in the previous step.</p>
+
+  		<p>Wait till the disk is unmounted and then continue with the most important part - overwritting the contents of the SD card with the image.</p>
+
+  		<blockquote class="alert-danger"><p><b>WARNING:</b> be very careful with this as you can accidentaly damage your computer's system drive if you enter the wrong device ID.</p></blockquote>
+
+  		<pre>sudo dd if=&lt;image&gt; of=/dev/&lt;ID&gt; bs=1m</pre>
+
+  		<p><code>if</code> is the input, <code>of</code> is the output and <code>bs</code> is the size of chunk of data that is being written to the output. Replace <code>&lt;image&gt;</code> by the name of your image file, and <code>&lt;ID&gt;</code> by the device ID of your SD card. For example, with the ID I found in previous step and the image file I have dowloaded, the command looks like the following :
+      <code>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/disk1 bs=1m</code>.
+      But be careful, as - once again - <b>your device ID and image file might be different than mine</b>.</p>
+
+  		<p>Once you have double checked the ID, and image file name, execute the command. This process will take some time. So go make a coffee. And a sandwich. Don't worry if it seems to be idle. It isn't.</p>
+
+  		<p>Once your Terminal has returned to it's normal state (you can tell that by being able to issue simple commands like <code>ls</code> and <code>cd</code>), eject the SD card by using <code>diskutil eject /dev/&lt;ID&gt;</code>. When the terminal has returned to it's normal state, you can remove your SD card.</p>
+  		</div><!-- /.mac -->
+
+  		<div class="win">
+  			<h3>Determining which device is my SD card</h3>
+        <p>First, eject your SD card from the card reader if it is there. Open the My Computer section/directory so you can see all the storage devices connected to your computer. You should see one or more devices with letters C, D, E...</p>
+
+        <p>Insert your SD card into the SD card reader of your computer. A new device should appear. Windows also takes care of automatically assigning a drive letter for it. Memorize that letter because we are going to need it in the next step.</p>
+
+        <h3>Burning the Raspbian image</h3>
+        <p>On Windows you need a new program for almost every new task you want to do. It is true in this case as well. To burn the Raspbian disk image to the SD card, we have to download a program called <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. It's main purpose is just that: to burn disk image files to actual disks, USB sticks, flash drives and SD cards.</p>
+
+        <p>Download and install <a href="http://sourceforge.net/projects/win32diskimager/">Win32 Disk Imager</a>. Open it and choose the previously downloaded Raspbian image file (<code>2014-01-07-wheezy-raspbian.img</code>) as the input and the disk that represents your SD card. Press Burn and wait till the process finishes.</p>
+  		</div><!-- /.win -->
+
+  		<div class="linux">
+  			<p>Linux instructions comming soon...</p>
+  		</div><!-- /.linux -->
+
+      <p>Don't eject the SD card yet.</p>
+
+
+
+      <!--_______________ SECTION 3 _______________-->
+      <h2>3. Sharing your computer's internet connection with the Raspberry Pi</h2>
+
+      <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. How to do this is different with each operating system, but the baseline is the same.</p>
+
+      <p>Firstly, you must configure your laptop to share its Internet connection with the port to which the Pi is connected. The way your computer achieves this is by creating a separate network which has an Internet access.</p>
+
+      <p>Secondly, we will connect the Pi to that network, by assigning it a static IP address. Therefore, we also need to discover what is the address of that network.</p>
+
+      <h3>Enabling Internet Sharing</h3>
+
+      <div class="mac">      
+        <p>Go to <b>System Preferences</b>, click on <b>Sharing</b>. Select the <b>Internet Sharing</b> checkbox and choose <b>Wi-Fi</b> form the <b>Share your connection from</b> dropdown. Check the <b>Ethernet</b> checkbox in the <b>To computers using</b> field.</p>
+
+        <p>Now your Mac computer automatically assigns an IP address to whatever is connected to the computer's ethernet port unless a static IP address on the connected device is set.</p>
+
+        <p>With our Pi we will need to do just that - set a static IP address, but to do that we need to know a bit more about the network that the Mac computer is setting up to share the internet connection.</p>
+
+        <h3>Determining internet sharing subnet settings</h3>
+
+        <p>Open Terminal and run <code>ifconfig</code>. A list of enabled network devices and their properties should fill the screen. Search for the one that has <code>bridge</code> in front.</p>
+
+        <pre>bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
+    options=23<RXCSUM,TXCSUM,TSO4>
+    ether 02:25:4b:3d:a7:64 
+    inet <b>192.168.2.1</b> netmask <b>0xffffff00</b> broadcast 192.168.2.255
+    ...</pre>
+
+        <p>We need to keep in mind the values that come after the <code>inet</code> keyword. <code>192.168.2.1</code> is the router (gateway) address and in this case it's your Mac. <code>0xffffff00</code> is the netmask that usually is expressed in numbers like this: <code>255.255.255.0</code>. To make things easier, <a href="http://www.pawprint.net/designresources/netmask-converter.php">here</a> is a table with the most common hex values for netmasks.</p>
+
+        <h3>Static IP address for the Pi</h3>
+
+        <p>If our gateway address is <code>192.168.2.1</code>, our static IP address can vary between <code>192.168.2.2</code> to <code>192.168.2.254</code>. If your gateway address is different, leave the first 3 numbers the same and add the last one in the range from 2 to 254.</p>
+
+      </div>
+
+      <div class="linux">
+        <p>First go to <b>system settings</b> then <b>Network</b>. In order to be able to modify the options for the Ethernet port, you need it to be active. So for example, connect your Raspberry Pi to the port, and power it up. Then, open the <b>wired</b> tab, click on <b>options</b>, then <b>IPv4 settings</b> and change the <b>Method</b> to <b>"Shared to other computers"</b>, then save the changes. That's it! Your Internet is shared.</p>
+
+        <h3>Finding out the address of the gateway</h3>
+
+        <p>Open your terminal and run <code>ifconfig</code>. It will print a list of your network interfaces, including the Ethernet port on which Internet sharing is set-up. The IP address of that interface is the gateway address. This is what I get when executing the command :</p>
+        
+        <pre>
+  <b>eth0</b>      Link encap:Ethernet  HWaddr 90:f6:21:7d:7a:66  
+            inet addr:<b>10.42.0.1</b>  Bcast:10.42.0.255  Mask:255.255.255.0
+            inet6 addr: fe80::92e6:baff:fe7d:be66/64 Scope:Link
+            UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+            RX packets:3107 errors:0 dropped:0 overruns:0 frame:0
+            TX packets:4570 errors:0 dropped:0 overruns:0 carrier:0
+            collisions:0 txqueuelen:1000 
+            RX bytes:383440 (383.4 KB)  TX bytes:662042 (662.0 KB)
+            Interrupt:43 Base address:0x6000 
+
+  lo        Link encap:Local Loopback  
+            inet addr:127.0.0.1  Mask:255.0.0.0
+            inet6 addr: ::1/128 Scope:Host
+            UP LOOPBACK RUNNING  MTU:16436  Metric:1
+            RX packets:7198 errors:0 dropped:0 overruns:0 frame:0
+            TX packets:7198 errors:0 dropped:0 overruns:0 carrier:0
+            collisions:0 txqueuelen:0 
+            RX bytes:771195 (771.1 KB)  TX bytes:771195 (771.1 KB)
+
+  wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b  
+            inet addr:192.168.0.102  Bcast:192.168.0.255  Mask:255.255.255.0
+            inet6 addr: fe80::225:d3ff:febd:1b5b/64 Scope:Link
+            UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+            RX packets:84839 errors:0 dropped:0 overruns:0 frame:0
+            TX packets:36230 errors:0 dropped:0 overruns:0 carrier:0
+            collisions:0 txqueuelen:1000 
+            RX bytes:45789161 (45.7 MB)  TX bytes:8132670 (8.1 MB)
+        </pre>
+
+        <p>In my case it is easy to find the right interface, as there is only 2 physical interfaces and loopback. You can forget about loopback, this is not the interface you are looking for. In my case, interfaces are named conveniently so that it is easy to find which one is the wifi (<b>wlan0</b>), which one is the Ethernet port (<b>eth0</b>).</p>
+
+        <p>If on the other hand you cannot figure out by their name, you can run the command <code>sudo lshw -class network</code>. This will give you more detailed information about all the interfaces and help you to find the id of your Wifi and Ethernet interfaces.</p>
+
+        <p>When you have figured out which is your ethernet port, the address you are looking for is the numbers just after <b>inet addr:</b> as emphasized in the example output above.</p>
+
+      </div>
+
+      <div class="win">
+        <ol>
+          <li>Click the <b>Start</b> button. Click the <b>Control Panel</b> item. In the search box type <code>adapter</code> and then, under <b>Network and Sharing Center</b>, click <b>View network connections</b>.</li>
+
+          <li>Choose the connection that you want to share, right-click it and click Properties.</li>
+
+          <li>Click <b>Sharing</b> tab and select the <b>Allow other network users to connect through this computer’s Internet connection</b> check box.</li>
+        </ol>
+
+        <p>You should be able to connect to the internet via your windows computer now. The only problem now is that we need a static IP adress instead of dynamic.</p>
+
+        <h3>Determining ICS network settings</h3>
+
+        <p>To be able to assign a static IP address for our Pi, we need to know something about the network it will be connected to.</p>
+
+        <p>TODO</p>
+
+        <p>References: <a href="http://windows.microsoft.com/en-us/windows/set-internet-connection-sharing#1TC=windows-7">Microsoft</a></p>
+      </div>
+
+      <h3>Connecting the Pi to a router</h3>
+
+      <p><b>If you've tried everything and cannot share Internet with your Pi</b>, but you have the possibility to connect the Pi to the router, <b>and you can connect to the admin interface of the router</b> there is still hope.</p>
+
+      <p>First you will need to restore the defaults. Remove all the network configuration that you might have added in <code>cmdlint.txt</code> or in <code>/etc/network/interfaces</code>.</p>
+
+      <p>Then connect your Pi to the router with an Ethernet wire. If everything works fine, the router should now assign an IP address to your Pi automatically. The only issue is that you don't know what that IP address is! By chance, in most of the routers, you can see a list of connected devices and their IP addresses by connecting to the admin interface of the router. So let's do this.</p>
+
+      <p>First, you need to discover the IP address of your router. It is normally your own IP address, but replacing the last number by <code>1</code>. For example if your IP address is <code>192.168.1.123</code>, your router's IP address is <code>192.168.1.1</code>. Then, open a web browser and type the IP address of the router in the address bar. You should then be prompted for a password and user name. If you don't know what they are, ask the administrator of the network. If it is your own router and you never changed the password, there should be an indication of what is the default password in your router's user manual.</b>
+
+      <p>Once you are connected to your router, dig in the menu, looking for the list of connected clients. Interfaces for all vendors are completely different. So the only advice I can give you is to look for a <b>DHCP</b> menu. When you have found the address of your Pi, you can just connect to it through SSH. The Pi should now have Internet connection.</p>
+
+      <!--_______________ SECTION 4 _______________-->
+      <h2>4. Launching the Pi</h2>    
+
+      <h3>Assigning IP addresses</h3>
+
+      <p>When the Pi will be running, we will connect to it from our laptop via SSH. In order to do this, we need to be able to access the Pi via ethernet, therefore we need to know its IP address. An obvious way to know it is by assigning it ourselves. So let's assign our Pi a known static IP address.</p>
+      <p>To do that, insert the SD card in the reader, and with the file browser of your operating system browse the contents of the card. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
+
+      <div class="mac">
+        <pre>ip=<b>192.168.2.200</b>::<b>192.168.2.1</b>:255.255.255.0:rpi:eth0:off</pre>
+
+        <p>We chose the IP address <code>192.168.2.200</code> for the previously discovered gateway <code>192.168.2.1</code> of our internet sharing subnet with the netmask <code>255.255.255.0</code>.</p>
+
+        <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+        <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</pre>
+      </div>
+
+      <div class="win">
+        <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+        <p>Why this IP? TODO</p>
+
+        <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+        <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+      </div>
+
+      <div class="linux">
+        <pre>ip=<b>10.42.0.2</b>::<b>10.42.0.1</b>:255.255.255.0:rpi:eth0:off</pre>
+
+        <p>In this line, the first series of numbers is the static IP we assign to the Pi, the second series of numbers is the gateway IP discovered in the previous step. The IP you assign to your Pi must be in the same network as the gateway. A safe choice for this is keeping the same first three numbers, and chosing a last number between 2 and 254.</p>
+
+        <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+        <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=10.42.0.2::10.42.0.1:255.255.255.0:rpi:eth0:off</pre>
+      </div>
+
+      <p>We will be able to access the Pi through network with the IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">10.42.0.1</code>.</p>
+
+      <p>If you don't have an internet connection to share, you can assign your computer a static IP address, for example <code>192.168.1.1</code>. <span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the Pi's IP address to <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code class="mac">192.168.2.1</code><code class="win">192.168.1.1</code><code class="linux">192.168.1.1</code> (the static IP of your computer). You may need to disconnect from any wireless networks to make this work.</p>
+
+
+      <h3>Booting up - the first time</h3>
+      <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi before powering-it up. Plug-in the Pi's power adapter.</p>
+
+      <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Run <code class="mac">ping 192.168.2.200</code><code class="win">ping 192.168.1.200</code><code class="linux">ping 192.168.1.200</code>. There should be response:</p>
+      <div class="mac">
+        <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+      </div>
+      <div class="win">
+        <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+      </div>
+      <div class="linux">
+        <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+      </div>
+
+      <p>If on the other hand it says:</p>
+      <pre>Request timeout for icmp_seq 0</pre>
+      <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to check as the Pi takes about 20 seconds to boot.</p>
+
+      <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Run <code class="mac">ssh pi@192.168.2.200</code><code class="win">ssh pi@192.168.1.200</code><code class="linux">ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once prompted for a password.</p>
+      <p class="win">Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
+
+      <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
+
+
+      <h3>Configuration</h3>
+      <p>Ok, let's change the real network settings.</p>
+
+      <p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window after you have successfully connected to the Pi via SSH.</p>
+
+      <p><code>sudo</code> means that you are executing a command as administrator (or "root"), so basically you have every right. Be careful though, as it also means you can potentially harm your system.</p>
+
+      <p>Add the following content there:</p>
+      <div class="mac">
+        <pre>auto lo
+
+  iface lo inet loopback
+  iface eth0 inet static
+
+  address 192.168.2.200
+  netmask 255.255.255.0
+  gateway 192.168.2.1</pre>
+      </div>
+      <div class="win">
+        <pre>auto lo
+
+  iface lo inet loopback
+  iface eth0 inet static
+
+  address 192.168.1.200
+  netmask 255.255.255.0
+  gateway 192.168.1.1</pre>
+      </div>
+      <div class="linux">
+        <pre>auto lo
+
+  iface lo inet loopback
+  iface eth0 inet static
+
+  address 192.168.1.200
+  netmask 255.255.255.0
+  gateway 192.168.1.1</pre>
+      </div>
+
+      <p>Save the file and exit.</p>
+
+      <p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by running <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span>.</p>
+
+      <p>Delete the <code class="mac">ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</code><code class="win">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code><code class="linux">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part, then save the file and exit.</p>
+
+      <p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
+
+      <p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
+
+      <h3>Checking Internet connectivity</h3>
+
+      <p>To do this, try to download a web page using the command <b>wget</b>. For example <b>wget www.cc4av.info</b> . If everything goes well, you should get an answer like the following :</p>
+
+  <pre>
+  ...lots of text...
+  Saving to: `index.html'
+
+      [ <=>                                                                                                  ] 16,025      --.-K/s   in 0.06s   
+
+  2014-03-23 09:59:37 (263 KB/s) - `index.html' saved [16025]
+  </pre>
+
+      <p>If this failed, you might need to change your Pi's DNS settings. For this edit the file <b>etc/resolv.conf</b>. It should contain one line <code>nameserver 192.168.0.1</code>. Simply replace <code>192.168.0.1</code> by the address of the gateway. Then save the file and run <code>sudo reboot</code> to reboot the Pi. Then try again to download a web page.</p>
+
+
+
+      <!--_______________ SECTION 5 _______________-->
+      <h2>5. Configuring the Pi further</h2>
+
+    	<h3>Expanding partition</h3>
+
+      <p>If your whole installation is on the SD card, the easiest way to go is to use the <code>raspi-config</code> tool. Run <code>sudo raspi-config</code> in the Raspberry Pi console to open the tool's interface.</p>
+
+      <p>Select the appropriate menu item and press enter. You will have to reboot the Pi after this step.</p>
+
+
+    	<h3>Auto Login</h3>
+    	
+    	<p>To make your pi log in automatically, run the following line in the shell:</p>
+
+    	<pre>sudo nano /etc/inittab</pre>
+    	
+    	<p>Comment (by using #) the line starting the terminal tty1 ("<code>1:2345:respawn:/sbin/getty 115200 tty1</code>"), and just bellow it add:</p>
+
+    	<pre>1:2345:respawn:/bin/login -f pi tty1 /dev/tty1 2>&1</pre>
+
+      <blockquote class="alert-info"><p><b>TIP:</b> Use keyboard arrow keys to navigate the text file. You won't see scrollbars in this kind of text editors and adjusting the cursor position with mouse won't do any good.</p></blockquote>
+
+    	<p>Save the file and close.</p>
+
+
+    	<h3>Preventing the screen from going blank</h3>
+
+    	<p>If you are using your Pi through SSH without an actual keyboard connected, the screen might go to sleep after some time as your Pi does not detect any activity. To prevent that, edit the <code>rc.local</code> file by opening it in the nano editor: <code>sudo nano /etc/rc.local</code></p>
+
+    	<p>Add the following line just before the <code>exit 0</code> line:</p>
+
+    	<pre>sh -c 'setterm -blank 0 -powersave off -powerdown 0 < /dev/console > /dev/console 2>&1'</pre>
+
+    	<p>Save the file and exit. Reboot your Pi: <code>sudo reboot</code>. Now the screen will stay awake.</p>
+
+
+  		<h3>Startup scripts</h3>
+
+  		Starting a program on boot
+  		<p>In <code>/home/pi</code> create an executable shell script called <code>startup.sh</code>:</p>
+
+      <pre>touch startup.sh
+  chmod a+x startup.sh</pre>
+  		
+  		<p>Then open <code>.bashrc</code></p> 
+
+  		<pre>sudo nano ~/.bashrc</pre>
+
+  		<p>and add the following line at the end of the file:</p>
+
+  		<pre>~/startup.sh</pre>
+
+      <p>Save the file and exit.</p>
+
+  		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
+
+  		<pre>sudo nano ~/startup.sh</pre>
+
+  		<p>Replace the contents of the file with the following:</p>
+
+  		<pre>#!/bin/bash
+
+  echo "Checking SSH connection...";
+  if [ -z "$SSH_CONNECTION" ]; then
+  	echo "No SSH connection, launching scripts.";
+  	# Your scripts here
+  else
+  	echo "SSH connection, nothing to be launched.";
+  fi</pre>
+
+  		<p>You can add your own scripts just after the <code># Your scripts here</code> line. When you are done, save the file and exit.</p>
+
+
+
+      <!--_______________ SECTION 6 _______________-->
+      <h2>6. Useful tips</h2>
+
+      <h3>Getting a graphical interface for programs running on the Pi</h3>
+
+      <p>Even when connecting through SSH, it is still possible to get graphical user interface (also called "GUI") for many programs. This is achieved by using a technique known as "X forwarding". The program runs on the Pi, but forwards its graphical output to your own laptop. On your laptop you need to have a server that interprets those commands.</p>
+
+      <div class="linux mac">
+        <p class="linux">On Linux, X is the normal way to display GUIs. Therefore you have nothing extra to install.</p>
+
+        <p class="mac">First, you should install <a href="http://xquartz.macosforge.org/landing/">XQuartz</a>, which is a X11 server for mac OS.</p>
+
+        <p>Connect to your Pi through SSH, but add the <code>-X</code> option. For example <code>ssh -X pi@192.168.2.200</code></p>
+      </div>
+
+      <div class="win">
+        <p>There are many programs that allow you to connect through SSH with X forwarding. We recommend you to use <a href="http://mobaxterm.mobatek.net/">MobaXterm</a>. It is a good all-in-one solution for working through SSH. You can connect, save sessions, transfer files very easily, and also enable X forwarding to get GUI of programs running on the Pi.</p>
+
+        <p>To connect, click on "session", then go to "SSH" and type the IP address of your Pi. That's all there is to it. X forwarding should be enabled by default.</p>
+      </div>  
+
+      <p>Once you have successfuly opened a connection, you can test that X forwarding works by opening a program that has a GUI on your Pi. For example, try to open "leafpad" by running <code>leafpad</code> in the terminal. Leafpad is a simple text editor, and if everything works fine, you should see it open on your laptop.</p>
+
+    <!--_______________ END RIGHT COLUMN _______________-->
     </div>
 
-    <div class="linux">
-      <p>First go to <b>system settings</b> then <b>Network</b>. In order to be able to modify the options for the Ethernet port, you need it to be active. So for example, connect your Raspberry Pi to the port, and power it up. Then, open the <b>wired</b> tab, click on <b>options</b>, then <b>IPv4 settings</b> and change the <b>Method</b> to <b>"Shared to other computers"</b>, then save the changes. That's it! Your Internet is shared.</p>
-
-      <h3>Finding out the address of the gateway</h3>
-
-      <p>Open your terminal and run <code>ifconfig</code>. It will print a list of your network interfaces, including the Ethernet port on which Internet sharing is set-up. The IP address of that interface is the gateway address. This is what I get when executing the command :</p>
-      
-      <pre>
-<b>eth0</b>      Link encap:Ethernet  HWaddr 90:f6:21:7d:7a:66  
-          inet addr:<b>10.42.0.1</b>  Bcast:10.42.0.255  Mask:255.255.255.0
-          inet6 addr: fe80::92e6:baff:fe7d:be66/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:3107 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:4570 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
-          RX bytes:383440 (383.4 KB)  TX bytes:662042 (662.0 KB)
-          Interrupt:43 Base address:0x6000 
-
-lo        Link encap:Local Loopback  
-          inet addr:127.0.0.1  Mask:255.0.0.0
-          inet6 addr: ::1/128 Scope:Host
-          UP LOOPBACK RUNNING  MTU:16436  Metric:1
-          RX packets:7198 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:7198 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:0 
-          RX bytes:771195 (771.1 KB)  TX bytes:771195 (771.1 KB)
-
-wlan0     Link encap:Ethernet  HWaddr 0a:99:d3:b5:1b:5b  
-          inet addr:192.168.0.102  Bcast:192.168.0.255  Mask:255.255.255.0
-          inet6 addr: fe80::225:d3ff:febd:1b5b/64 Scope:Link
-          UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
-          RX packets:84839 errors:0 dropped:0 overruns:0 frame:0
-          TX packets:36230 errors:0 dropped:0 overruns:0 carrier:0
-          collisions:0 txqueuelen:1000 
-          RX bytes:45789161 (45.7 MB)  TX bytes:8132670 (8.1 MB)
-      </pre>
-
-      <p>In my case it is easy to find the right interface, as there is only 2 physical interfaces and loopback. You can forget about loopback, this is not the interface you are looking for. In my case, interfaces are named conveniently so that it is easy to find which one is the wifi (<b>wlan0</b>), which one is the Ethernet port (<b>eth0</b>).</p>
-
-      <p>If on the other hand you cannot figure out by their name, you can run the command <code>sudo lshw -class network</code>. This will give you more detailed information about all the interfaces and help you to find the id of your Wifi and Ethernet interfaces.</p>
-
-      <p>When you have figured out which is your ethernet port, the address you are looking for is the numbers just after <b>inet addr:</b> as emphasized in the example output above.</p>
-
-    </div>
-
-    <div class="win">
-      <ol>
-        <li>Click the <b>Start</b> button. Click the <b>Control Panel</b> item. In the search box type <code>adapter</code> and then, under <b>Network and Sharing Center</b>, click <b>View network connections</b>.</li>
-
-        <li>Choose the connection that you want to share, right-click it and click Properties.</li>
-
-        <li>Click <b>Sharing</b> tab and select the <b>Allow other network users to connect through this computer’s Internet connection</b> check box.</li>
-      </ol>
-
-      <p>You should be able to connect to the internet via your windows computer now. The only problem now is that we need a static IP adress instead of dynamic.</p>
-
-      <h3>Determining ICS network settings</h3>
-
-      <p>To be able to assign a static IP address for our Pi, we need to know something about the network it will be connected to.</p>
-
-      <p>TODO</p>
-
-      <p>References: <a href="http://windows.microsoft.com/en-us/windows/set-internet-connection-sharing#1TC=windows-7">Microsoft</a></p>
-    </div>
-
-    <h3>Connecting the Pi to a router</h3>
-
-    <p><b>If you've tried everything and cannot share Internet with your Pi</b>, but you have the possibility to connect the Pi to the router, <b>and you can connect to the admin interface of the router</b> there is still hope.</p>
-
-    <p>First you will need to restore the defaults. Remove all the network configuration that you might have added in <code>cmdlint.txt</code> or in <code>/etc/network/interfaces</code>.</p>
-
-    <p>Then connect your Pi to the router with an Ethernet wire. If everything works fine, the router should now assign an IP address to your Pi automatically. The only issue is that you don't know what that IP address is! By chance, in most of the routers, you can see a list of connected devices and their IP addresses by connecting to the admin interface of the router. So let's do this.</p>
-
-    <p>First, you need to discover the IP address of your router. It is normally your own IP address, but replacing the last number by <code>1</code>. For example if your IP address is <code>192.168.1.123</code>, your router's IP address is <code>192.168.1.1</code>. Then, open a web browser and type the IP address of the router in the address bar. You should then be prompted for a password and user name. If you don't know what they are, ask the administrator of the network. If it is your own router and you never changed the password, there should be an indication of what is the default password in your router's user manual.</b>
-
-    <p>Once you are connected to your router, dig in the menu, looking for the list of connected clients. Interfaces for all vendors are completely different. So the only advice I can give you is to look for a <b>DHCP</b> menu. When you have found the address of your Pi, you can just connect to it through SSH. The Pi should now have Internet connection.</p>
-
-    <!--_______________ SECTION 4 _______________-->
-    <h2>4. Launching the Pi</h2>    
-
-    <h3>Assigning IP addresses</h3>
-
-    <p>When the Pi will be running, we will connect to it from our laptop via SSH. In order to do this, we need to be able to access the Pi via ethernet, therefore we need to know its IP address. An obvious way to know it is by assigning it ourselves. So let's assign our Pi a known static IP address.</p>
-    <p>To do that, insert the SD card in the reader, and with the file browser of your operating system browse the contents of the card. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
-
-    <div class="mac">
-      <pre>ip=<b>192.168.2.200</b>::<b>192.168.2.1</b>:255.255.255.0:rpi:eth0:off</pre>
-
-      <p>We chose the IP address <code>192.168.2.200</code> for the previously discovered gateway <code>192.168.2.1</code> of our internet sharing subnet with the netmask <code>255.255.255.0</code>.</p>
-
-      <p>The <code>cmdline.txt</code> file should look like this now:</p>
-
-      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</pre>
-    </div>
-
-    <div class="win">
-      <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-
-      <p>Why this IP? TODO</p>
-
-      <p>The <code>cmdline.txt</code> file should look like this now:</p>
-
-      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-    </div>
-
-    <div class="linux">
-      <pre>ip=<b>10.42.0.2</b>::<b>10.42.0.1</b>:255.255.255.0:rpi:eth0:off</pre>
-
-      <p>In this line, the first series of numbers is the static IP we assign to the Pi, the second series of numbers is the gateway IP discovered in the previous step. The IP you assign to your Pi must be in the same network as the gateway. A safe choice for this is keeping the same first three numbers, and chosing a last number between 2 and 254.</p>
-
-      <p>The <code>cmdline.txt</code> file should look like this now:</p>
-
-      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=10.42.0.2::10.42.0.1:255.255.255.0:rpi:eth0:off</pre>
-    </div>
-
-    <p>We will be able to access the Pi through network with the IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">10.42.0.1</code>.</p>
-
-    <p>If you don't have an internet connection to share, you can assign your computer a static IP address, for example <code>192.168.1.1</code>. <span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the Pi's IP address to <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code class="mac">192.168.2.1</code><code class="win">192.168.1.1</code><code class="linux">192.168.1.1</code> (the static IP of your computer). You may need to disconnect from any wireless networks to make this work.</p>
-
-
-    <h3>Booting up - the first time</h3>
-    <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi before powering-it up. Plug-in the Pi's power adapter.</p>
-
-    <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Run <code class="mac">ping 192.168.2.200</code><code class="win">ping 192.168.1.200</code><code class="linux">ping 192.168.1.200</code>. There should be response:</p>
-    <div class="mac">
-      <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-    </div>
-    <div class="win">
-      <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-    </div>
-    <div class="linux">
-      <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-    </div>
-
-    <p>If on the other hand it says:</p>
-    <pre>Request timeout for icmp_seq 0</pre>
-    <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to check as the Pi takes about 20 seconds to boot.</p>
-
-    <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Run <code class="mac">ssh pi@192.168.2.200</code><code class="win">ssh pi@192.168.1.200</code><code class="linux">ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once prompted for a password.</p>
-    <p class="win">Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
-
-    <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
-
-
-    <h3>Configuration</h3>
-    <p>Ok, let's change the real network settings.</p>
-
-    <p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window after you have successfully connected to the Pi via SSH.</p>
-
-    <p><code>sudo</code> means that you are executing a command as administrator (or "root"), so basically you have every right. Be careful though, as it also means you can potentially harm your system.</p>
-
-    <p>Add the following content there:</p>
-    <div class="mac">
-      <pre>auto lo
-
-iface lo inet loopback
-iface eth0 inet static
-
-address 192.168.2.200
-netmask 255.255.255.0
-gateway 192.168.2.1</pre>
-    </div>
-    <div class="win">
-      <pre>auto lo
-
-iface lo inet loopback
-iface eth0 inet static
-
-address 192.168.1.200
-netmask 255.255.255.0
-gateway 192.168.1.1</pre>
-    </div>
-    <div class="linux">
-      <pre>auto lo
-
-iface lo inet loopback
-iface eth0 inet static
-
-address 192.168.1.200
-netmask 255.255.255.0
-gateway 192.168.1.1</pre>
-    </div>
-
-    <p>Save the file and exit.</p>
-
-    <p>Now we have to remove the extra line from <code>cmdline.txt</code> that we added earlier. To do that, open the file in nano by running <code>sudo nano /boot/cmdline.txt</code> in <span class="mac linux">Terminal</span><span class="win">Putty</span>.</p>
-
-    <p>Delete the <code class="mac">ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</code><code class="win">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code><code class="linux">ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</code> part, then save the file and exit.</p>
-
-    <p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
-
-    <p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
-
-    <h3>Checking Internet connectivity</h3>
-
-    <p>To do this, try to download a web page using the command <b>wget</b>. For example <b>wget www.cc4av.info</b> . If everything goes well, you should get an answer like the following :</p>
-
-<pre>
-...lots of text...
-Saving to: `index.html'
-
-    [ <=>                                                                                                  ] 16,025      --.-K/s   in 0.06s   
-
-2014-03-23 09:59:37 (263 KB/s) - `index.html' saved [16025]
-</pre>
-
-    <p>If this failed, you might need to change your Pi's DNS settings. For this edit the file <b>etc/resolv.conf</b>. It should contain one line <code>nameserver 192.168.0.1</code>. Simply replace <code>192.168.0.1</code> by the address of the gateway. Then save the file and run <code>sudo reboot</code> to reboot the Pi. Then try again to download a web page.</p>
-
-
-
-    <!--_______________ SECTION 5 _______________-->
-    <h2>5. Configuring the Pi further</h2>
-
-  	<h3>Expanding partition</h3>
-
-    <p>If your whole installation is on the SD card, the easiest way to go is to use the <code>raspi-config</code> tool. Run <code>sudo raspi-config</code> in the Raspberry Pi console to open the tool's interface.</p>
-
-    <p>Select the appropriate menu item and press enter. You will have to reboot the Pi after this step.</p>
-
-
-  	<h3>Auto Login</h3>
-  	
-  	<p>To make your pi log in automatically, run the following line in the shell:</p>
-
-  	<pre>sudo nano /etc/inittab</pre>
-  	
-  	<p>Comment (by using #) the line starting the terminal tty1 ("<code>1:2345:respawn:/sbin/getty 115200 tty1</code>"), and just bellow it add:</p>
-
-  	<pre>1:2345:respawn:/bin/login -f pi tty1 /dev/tty1 2>&1</pre>
-
-    <blockquote class="alert-info"><p><b>TIP:</b> Use keyboard arrow keys to navigate the text file. You won't see scrollbars in this kind of text editors and adjusting the cursor position with mouse won't do any good.</p></blockquote>
-
-  	<p>Save the file and close.</p>
-
-
-  	<h3>Preventing the screen from going blank</h3>
-
-  	<p>If you are using your Pi through SSH without an actual keyboard connected, the screen might go to sleep after some time as your Pi does not detect any activity. To prevent that, edit the <code>rc.local</code> file by opening it in the nano editor: <code>sudo nano /etc/rc.local</code></p>
-
-  	<p>Add the following line just before the <code>exit 0</code> line:</p>
-
-  	<pre>sh -c 'setterm -blank 0 -powersave off -powerdown 0 < /dev/console > /dev/console 2>&1'</pre>
-
-  	<p>Save the file and exit. Reboot your Pi: <code>sudo reboot</code>. Now the screen will stay awake.</p>
-
-
-		<h3>Startup scripts</h3>
-
-		Starting a program on boot
-		<p>In <code>/home/pi</code> create an executable shell script called <code>startup.sh</code>:</p>
-
-    <pre>touch startup.sh
-chmod a+x startup.sh</pre>
-		
-		<p>Then open <code>.bashrc</code></p> 
-
-		<pre>sudo nano ~/.bashrc</pre>
-
-		<p>and add the following line at the end of the file:</p>
-
-		<pre>~/startup.sh</pre>
-
-    <p>Save the file and exit.</p>
-
-		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
-
-		<pre>sudo nano ~/startup.sh</pre>
-
-		<p>Replace the contents of the file with the following:</p>
-
-		<pre>#!/bin/bash
-
-echo "Checking SSH connection...";
-if [ -z "$SSH_CONNECTION" ]; then
-	echo "No SSH connection, launching scripts.";
-	# Your scripts here
-else
-	echo "SSH connection, nothing to be launched.";
-fi</pre>
-
-		<p>You can add your own scripts just after the <code># Your scripts here</code> line. When you are done, save the file and exit.</p>
-
-
-
-    <!--_______________ SECTION 6 _______________-->
-    <h2>6. Useful tips</h2>
-
-    <h3>Getting a graphical interface for programs running on the Pi</h3>
-
-    <p>Even when connecting through SSH, it is still possible to get graphical user interface (also called "GUI") for many programs. This is achieved by using a technique known as "X forwarding". The program runs on the Pi, but forwards its graphical output to your own laptop. On your laptop you need to have a server that interprets those commands.</p>
-
-    <div class="linux mac">
-      <p class="linux">On Linux, X is the normal way to display GUIs. Therefore you have nothing extra to install.</p>
-
-      <p class="mac">First, you should install <a href="http://xquartz.macosforge.org/landing/">XQuartz</a>, which is a X11 server for mac OS.</p>
-
-      <p>Connect to your Pi through SSH, but add the <code>-X</code> option. For example <code>ssh -X pi@192.168.2.200</code></p>
-    </div>
-
-    <div class="win">
-      <p>There are many programs that allow you to connect through SSH with X forwarding. We recommend you to use <a href="http://mobaxterm.mobatek.net/">MobaXterm</a>. It is a good all-in-one solution for working through SSH. You can connect, save sessions, transfer files very easily, and also enable X forwarding to get GUI of programs running on the Pi.</p>
-
-      <p>To connect, click on "session", then go to "SSH" and type the IP address of your Pi. That's all there is to it. X forwarding should be enabled by default.</p>
-    </div>  
-
-    <p>Once you have successfuly opened a connection, you can test that X forwarding works by opening a program that has a GUI on your Pi. For example, try to open "leafpad" by running <code>leafpad</code> in the terminal. Leafpad is a simple text editor, and if everything works fine, you should see it open on your laptop.</p>
-
-
-    <!--_______________ END CONTAINER _______________-->
-	</div>
+  <!--_______________ END ROW AND CONTAINER _______________-->
+	</div></div>
 
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.client.js"></script>

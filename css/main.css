@@ -13,3 +13,13 @@ ul {
 #hardware-list b {
   margin-right: 0.3em;
 }
+
+/* from docs : The affix plugin toggles between three classes,
+each representing a particular state: .affix, .affix-top, and .affix-bottom */
+#affix .affixH2Item {
+  margin-bottom: 1em;
+}
+
+.affix-top, .affix-bottom {
+  width: 100%;
+}
