@@ -21,7 +21,7 @@
 </head>
 
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -38,19 +38,18 @@
           <li class="win-nav active"><a href="#">Win</a></li>
           <li class="linux-nav" ><a href="#">Linux</a></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contents <b class="caret"></b></a>
+            <ul class="dropdown-menu" id="affix"><!-- autopopulis --></ul>
+          </li>
+        </ul>
       </div><!--/.nav-collapse -->
     </div>
-  </div>
+  </nav>
 
-	<div class="container-fluid"><div class="row">
-	
-    <div class="col-md-4">
-      <div id="affix" class="col-md-4" data-clampedwidth=".myParent" data-spy="affix" data-offset-top="60" data-offset-bottom="200">
-        <ul><!--Populated automatically--></ul>
-      </div>
-    </div>
+	<div class="container">
 
-    <div class="col-md-8">
   		<h1>Raspberry Pi ASAP Setup Guide</h1>
 
   		<p class="lead">A fast way to setup Raspberry Pi with Raspbian. This guide is a combination of information found on the internet and experience. Feel free to contribute via <a href="https://github.com/kr15h/RPi-Setup">GitHub</a>.</p>
@@ -58,7 +57,7 @@
 
 
   		<!--_______________ SECTION 1 _______________-->
-  		<h2>1. Before starting get all the following</h2>
+  		<h2>1. Prepare yourself</h2>
 
 
       <h3>Hardware</h3>
@@ -107,7 +106,7 @@
       </ul>
 
 
-      <h3>A wireless Internet connection.</h3>
+      <h3>Internet connection</h3>
       Yep ... you will need it for setting-up everything, and installing software on your Pi once it is ready.
 
 
@@ -201,7 +200,7 @@
 
 
       <!--_______________ SECTION 3 _______________-->
-      <h2>3. Sharing your computer's internet connection with the Raspberry Pi</h2>
+      <h2>3. Sharing net with the Pi</h2>
 
       <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. How to do this is different with each operating system, but the baseline is the same.</p>
 
@@ -523,7 +522,7 @@
       <!--_______________ SECTION 6 _______________-->
       <h2>6. Useful tips</h2>
 
-      <h3>Getting a graphical interface for programs running on the Pi</h3>
+      <h3>Getting a GUI for Pi programs</h3>
 
       <p>Even when connecting through SSH, it is still possible to get graphical user interface (also called "GUI") for many programs. This is achieved by using a technique known as "X forwarding". The program runs on the Pi, but forwards its graphical output to your own laptop. On your laptop you need to have a server that interprets those commands.</p>
 
@@ -543,11 +542,7 @@
 
       <p>Once you have successfuly opened a connection, you can test that X forwarding works by opening a program that has a GUI on your Pi. For example, try to open "leafpad" by running <code>leafpad</code> in the terminal. Leafpad is a simple text editor, and if everything works fine, you should see it open on your laptop.</p>
 
-    <!--_______________ END RIGHT COLUMN _______________-->
-    </div>
-
-  <!--_______________ END ROW AND CONTAINER _______________-->
-	</div></div>
+  </div><!-- /.container -->
 
 	<script src="js/jquery-1.11.0.min.js"></script>
 	<script src="js/jquery.client.js"></script>

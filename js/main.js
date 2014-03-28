@@ -39,34 +39,44 @@ var showOS = function(os) {
 // =============== Bootstrap affix plugin =============== //
 $(function() {
 	// Populates the affix with h2 and h3 titles from the page
-	var affixUl = $('#affix ul')
+	var affixUl = $('#affix')
 		, previousH2 = null
 
 	var setupTitle = function(titleElem, parentElem, titleHash) {
 		var titleText = titleElem.text()
-			, titleMenuItem = $('<li>')
-			, titleAnchor = $('<a>', { href: '#' + titleHash, class: 'titleAnchor' }).html(' #')
+		if ( titleElem.prop('tagName') == 'H2' ) {
+			titleText = '<b>' + titleText + '</b>';	
+		}
+		titleMenuItem = $('<li>')
+		titleAnchor = $('<a>', { href: '#' + titleHash, class: 'titleAnchor' }).html(' #')
 		titleElem.attr('id', titleHash)
 		titleElem.append(titleAnchor)
-		titleMenuItem.append($('<a>', { href: '#' + titleHash }).html(titleText))
+
+		if ( titleElem.prop('tagName') == 'H2' ) {
+			titleMenuItem.append($('<a>', { href: '#' + titleHash }).html(titleText))
+		} else {
+			titleMenuItem.append($('<a>', { href: '#' + titleHash, class: 'smaller' }).html(titleText))
+		}
+
 		parentElem.append(titleMenuItem)
 		return titleMenuItem
 	}
 
 	// Iterate on all h2 and set-up title
 	$('h2').each(function(i, h2) {
-		h2 = $(h2)
+		h2 = $(h2);
 		var h2Hash = 'titles.' + (i + 1)
 			, h2MenuItem = setupTitle(h2, affixUl, h2Hash)
-			, h2MenuChildList = $('<ul>')
-		h2MenuItem.append(h2MenuChildList)
-		h2MenuItem.addClass('affixH2Item affixItem')
 
 		// Iterate on all h3 that are children of the current h2, and set-up title
 		h2.nextUntil('h2').filter('h3').each(function(i, h3) {
 			h3 = $(h3)
-			var h3MenuItem = setupTitle(h3, h2MenuChildList, h2Hash + '.' + (i + 1))
-			h3MenuItem.addClass('affixH3Item affixItem')
+			var h3MenuItem = setupTitle(h3, affixUl, h2Hash + '.' + (i + 1))
 		})
+
+		// add a divider line for all h2's except the last one
+		if ( i < ($('h2').size()-1) ) { 
+			affixUl.append('<li class="divider">');
+		}
 	})
 })
