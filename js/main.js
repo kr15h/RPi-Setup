@@ -15,7 +15,7 @@ $(function(){
 	}
 	
 	// show OS content on click
-	$(".nav a").click( function(){
+	$("#os-nav a").click( function(){
 		hideAllOS();
 		showOS($(this).text());
 	});
@@ -25,7 +25,7 @@ var hideAllOS = function(){
 	$(".mac").hide();
 	$(".win").hide();
 	$(".linux").hide();
-	$(".nav li").removeClass("active");
+	$("#os-nav li").removeClass("active");
 }
 
 var showOS = function(os) {
