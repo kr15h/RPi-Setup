@@ -15,7 +15,8 @@ $(function(){
 	}
 	
 	// show OS content on click
-	$("#os-nav a").click( function(){
+	$("#os-nav a").click( function(event){
+		event.preventDefault()
 		hideAllOS();
 		showOS($(this).text());
 	});

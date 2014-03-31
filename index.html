@@ -125,9 +125,9 @@
 
   		<p class="linux">Use GParted to format your SD card to FAT32 file system.</p>
   		
-      <div class="mac">
-  		  <h3>Finding out the device ID of the SD card.</h3>
+      <h3>Determining which device is my SD card</h3>
 
+      <div class="mac">
         <p>First, eject the SD card.</p>
   		  
         <p>Then, open your Terminal, and run <code>diskutil list</code> to see what devices are connected to your computer. The output in the Terminal window will look similar to the following:</p>
@@ -180,7 +180,6 @@
   		</div><!-- /.mac -->
 
   		<div class="win">
-  			<h3>Determining which device is my SD card</h3>
         <p>First, eject your SD card from the card reader if it is there. Open the My Computer section/directory so you can see all the storage devices connected to your computer. You should see one or more devices with letters C, D, E...</p>
 
         <p>Insert your SD card into the SD card reader of your computer. A new device should appear. Windows also takes care of automatically assigning a drive letter for it. Memorize that letter because we are going to need it in the next step.</p>
@@ -200,13 +199,57 @@
 
 
       <!--_______________ SECTION 3 _______________-->
-      <h2>3. Sharing net with the Pi</h2>
+      <h2>3. Launching the Pi</h2>    
 
-      <p>In order to install new software on your freshly installed Raspbian, you will need to give your Pi Internet access. How to do this is different with each operating system, but the baseline is the same.</p>
+      <h3>Assigning IP addresses</h3>
+
+      <p>In order to connect for the first time, we need to give the Pi and our laptop static IP addresses that are in the same network.</p>
+
+      <p>To do that, insert the SD card in the reader, and with the file browser of your operating system browse the contents of the card. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
+
+      <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+      <p>The <code>cmdline.txt</code> file should look like this now:</p>
+
+      <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
+
+      <p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code>.</p>
+
+      <p>Now let's assign our laptop a static IP.</p>
+
+      <p><span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span><span class="win">TODO</span><span class="linux">Open the network manager, select your Ethernet connection and choose "static".</span> Set the IP address to <code>192.168.1.201</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless networks to make this work.</p>
+
+
+      <h3>Booting up - the first time</h3>
+      <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi, <b>then</b> plug-in the Pi's power adapter.</p>
+
+      <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Run <code>ping 192.168.2.200</code>. There should be response:</p>
+      <div>
+        <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+      </div>
+
+      <p>If on the other hand it says:</p>
+      <pre>Request timeout for icmp_seq 0</pre>
+      <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to wait as the Pi takes about 20 seconds to boot.</p>
+
+      <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Run <code>ssh pi@192.168.2.200</code> in the Terminal. Enter <code>raspberry</code> once prompted for a password.</p>
+      <p class="win">Use MobaXterm to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
+
+      <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
+
+
+
+      <!--_______________ SECTION 4 _______________-->
+      <h2>4. Sharing net with the Pi</h2>
+
+      <p>Now that your Pi is connected, we can safely share our laptop's Internet connection with it. Having an Internet connection will allow you to install new software on your Pi. For this step, don't disconnect from your Pi before being told to do so.</p>
+
+      <p>How to share the Internet connection is different with each operating system, but the baseline is the same.</p>
 
       <p>Firstly, you must configure your laptop to share its Internet connection with the port to which the Pi is connected. The way your computer achieves this is by creating a separate network which has an Internet access.</p>
 
       <p>Secondly, we will connect the Pi to that network, by assigning it a static IP address. Therefore, we also need to discover what is the address of that network.</p>
+
 
       <h3>Enabling Internet Sharing</h3>
 
@@ -216,9 +259,28 @@
         <p>Now your Mac computer automatically assigns an IP address to whatever is connected to the computer's ethernet port unless a static IP address on the connected device is set.</p>
 
         <p>With our Pi we will need to do just that - set a static IP address, but to do that we need to know a bit more about the network that the Mac computer is setting up to share the internet connection.</p>
+      </div>
 
-        <h3>Determining internet sharing subnet settings</h3>
+      <div class="linux">
+        <p>First go to <b>system settings</b> then <b>Network</b>. In order to be able to modify the options for the Ethernet port, you need it to be active. So for example, connect your Raspberry Pi to the port, and power it up. Then, open the <b>wired</b> tab, click on <b>options</b>, then <b>IPv4 settings</b> and change the <b>Method</b> to <b>"Shared to other computers"</b>, then save the changes. That's it! Your Internet is shared.</p>
+      </div>
 
+      <div class="win">
+        <p>Click the <b>Start</b> button. Click the <b>Control Panel</b> item. In the search box type <code>adapter</code> and then, under <b>Network and Sharing Center</b>, click <b>View network connections</b>.</p>
+
+        <p>Choose the connection that you want to share, right-click it and click Properties.</p>
+
+        <p>Click <b>Sharing</b> tab and select the <b>Allow other network users to connect through this computer’s Internet connection</b> check box. Also, select in the drop down menu the connection to which you want to give Internet, basically the port to which your Pi is connected.</p>
+
+        <p>When you click on "Apply", you should see a message box giving you the address of the network on which the Internet is shared. Write that address down carefully.</p>
+      </div>
+
+      <p>Finally, shutdown the Pi by running <code>sudo shutdown -h now</code> in the Pi's terminal.</p>
+
+
+      <h3 class="mac linux">Determining internet sharing subnet settings</h3>
+
+      <div class="mac">
         <p>Open Terminal and run <code>ifconfig</code>. A list of enabled network devices and their properties should fill the screen. Search for the one that has <code>bridge</code> in front.</p>
 
         <pre>bridge100: flags=8863<UP,BROADCAST,SMART,RUNNING,SIMPLEX,MULTICAST> mtu 1500
@@ -227,19 +289,14 @@
     inet <b>192.168.2.1</b> netmask <b>0xffffff00</b> broadcast 192.168.2.255
     ...</pre>
 
+        <b style="font-size:120%;color:orange;">TODO Is the netmask ever something else than 255.255.255.0 ? If not, it's better to leave the part below out to not confuse people</b>
+
         <p>We need to keep in mind the values that come after the <code>inet</code> keyword. <code>192.168.2.1</code> is the router (gateway) address and in this case it's your Mac. <code>0xffffff00</code> is the netmask that usually is expressed in numbers like this: <code>255.255.255.0</code>. To make things easier, <a href="http://www.pawprint.net/designresources/netmask-converter.php">here</a> is a table with the most common hex values for netmasks.</p>
 
-        <h3>Static IP address for the Pi</h3>
-
         <p>If our gateway address is <code>192.168.2.1</code>, our static IP address can vary between <code>192.168.2.2</code> to <code>192.168.2.254</code>. If your gateway address is different, leave the first 3 numbers the same and add the last one in the range from 2 to 254.</p>
-
       </div>
 
       <div class="linux">
-        <p>First go to <b>system settings</b> then <b>Network</b>. In order to be able to modify the options for the Ethernet port, you need it to be active. So for example, connect your Raspberry Pi to the port, and power it up. Then, open the <b>wired</b> tab, click on <b>options</b>, then <b>IPv4 settings</b> and change the <b>Method</b> to <b>"Shared to other computers"</b>, then save the changes. That's it! Your Internet is shared.</p>
-
-        <h3>Finding out the address of the gateway</h3>
-
         <p>Open your terminal and run <code>ifconfig</code>. It will print a list of your network interfaces, including the Ethernet port on which Internet sharing is set-up. The IP address of that interface is the gateway address. This is what I get when executing the command :</p>
         
         <pre>
@@ -277,28 +334,28 @@
         <p>If on the other hand you cannot figure out by their name, you can run the command <code>sudo lshw -class network</code>. This will give you more detailed information about all the interfaces and help you to find the id of your Wifi and Ethernet interfaces.</p>
 
         <p>When you have figured out which is your ethernet port, the address you are looking for is the numbers just after <b>inet addr:</b> as emphasized in the example output above.</p>
-
       </div>
 
-      <div class="win">
-        <ol>
-          <li>Click the <b>Start</b> button. Click the <b>Control Panel</b> item. In the search box type <code>adapter</code> and then, under <b>Network and Sharing Center</b>, click <b>View network connections</b>.</li>
 
-          <li>Choose the connection that you want to share, right-click it and click Properties.</li>
+      <h3>Connecting with a new static IP</h3>
 
-          <li>Click <b>Sharing</b> tab and select the <b>Allow other network users to connect through this computer’s Internet connection</b> check box.</li>
-        </ol>
+      <p>Now that you have discovered the address of the network to which Internet is shared, it is time to give your Pi a new static IP. Unplug your Pi, remove the SD card and in <code>cmdline.txt</code> replace the previous static IP and gateway IP by the ones you discovered in the previous step.</p>
 
-        <p>You should be able to connect to the internet via your windows computer now. The only problem now is that we need a static IP adress instead of dynamic.</p>
+      <p>When this is done, put back the card in the Pi, power it up, and connect to it using its new address</p>
 
-        <h3>Determining ICS network settings</h3>
+      <p>Once connected, try to download a web page using the command <b>wget</b>. For example <b>wget www.cc4av.info</b> . If everything goes well, you should get an answer like the following :</p>
 
-        <p>To be able to assign a static IP address for our Pi, we need to know something about the network it will be connected to.</p>
+  <pre>
+  ...lots of text...
+  Saving to: `index.html'
 
-        <p>TODO</p>
+      [ <=>                                                                                                  ] 16,025      --.-K/s   in 0.06s   
 
-        <p>References: <a href="http://windows.microsoft.com/en-us/windows/set-internet-connection-sharing#1TC=windows-7">Microsoft</a></p>
-      </div>
+  2014-03-23 09:59:37 (263 KB/s) - `index.html' saved [16025]
+  </pre>
+
+      <p>If this failed, you might need to change your Pi's DNS settings. For this edit the file <b>etc/resolv.conf</b>. It should contain one line <code>nameserver 192.168.0.1</code>. Simply replace <code>192.168.0.1</code> by <code>8.8.8.8</code>. Then save the file and run <code>sudo reboot</code> to reboot the Pi. Then try again to download a web page.</p>
+
 
       <h3>Connecting the Pi to a router</h3>
 
@@ -312,74 +369,12 @@
 
       <p>Once you are connected to your router, dig in the menu, looking for the list of connected clients. Interfaces for all vendors are completely different. So the only advice I can give you is to look for a <b>DHCP</b> menu. When you have found the address of your Pi, you can just connect to it through SSH. The Pi should now have Internet connection.</p>
 
-      <!--_______________ SECTION 4 _______________-->
-      <h2>4. Launching the Pi</h2>    
-
-      <h3>Assigning IP addresses</h3>
-
-      <p>When the Pi will be running, we will connect to it from our laptop via SSH. In order to do this, we need to be able to access the Pi via ethernet, therefore we need to know its IP address. An obvious way to know it is by assigning it ourselves. So let's assign our Pi a known static IP address.</p>
-      <p>To do that, insert the SD card in the reader, and with the file browser of your operating system browse the contents of the card. There should be a file named <code>cmdline.txt</code>. This file contains options that are passed to the Linux kernel as it boots up. Open the file in your favorite text editor. We need to add the following at the end of the existing content:</p>
-
-      <div class="mac">
-        <pre>ip=<b>192.168.2.200</b>::<b>192.168.2.1</b>:255.255.255.0:rpi:eth0:off</pre>
-
-        <p>We chose the IP address <code>192.168.2.200</code> for the previously discovered gateway <code>192.168.2.1</code> of our internet sharing subnet with the netmask <code>255.255.255.0</code>.</p>
-
-        <p>The <code>cmdline.txt</code> file should look like this now:</p>
-
-        <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.2.200::192.168.2.1:255.255.255.0:rpi:eth0:off</pre>
-      </div>
-
-      <div class="win">
-        <pre>ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-
-        <p>Why this IP? TODO</p>
-
-        <p>The <code>cmdline.txt</code> file should look like this now:</p>
-
-        <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
-      </div>
-
-      <div class="linux">
-        <pre>ip=<b>10.42.0.2</b>::<b>10.42.0.1</b>:255.255.255.0:rpi:eth0:off</pre>
-
-        <p>In this line, the first series of numbers is the static IP we assign to the Pi, the second series of numbers is the gateway IP discovered in the previous step. The IP you assign to your Pi must be in the same network as the gateway. A safe choice for this is keeping the same first three numbers, and chosing a last number between 2 and 254.</p>
-
-        <p>The <code>cmdline.txt</code> file should look like this now:</p>
-
-        <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=10.42.0.2::10.42.0.1:255.255.255.0:rpi:eth0:off</pre>
-      </div>
-
-      <p>We will be able to access the Pi through network with the IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">10.42.0.1</code>.</p>
-
-      <p>If you don't have an internet connection to share, you can assign your computer a static IP address, for example <code>192.168.1.1</code>. <span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> Set the Pi's IP address to <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code class="mac">192.168.2.1</code><code class="win">192.168.1.1</code><code class="linux">192.168.1.1</code> (the static IP of your computer). You may need to disconnect from any wireless networks to make this work.</p>
 
 
-      <h3>Booting up - the first time</h3>
-      <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi before powering-it up. Plug-in the Pi's power adapter.</p>
+      <!--_______________ SECTION 5 _______________-->
+      <h2>5. Configuring the Pi further</h2>
 
-      <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Run <code class="mac">ping 192.168.2.200</code><code class="win">ping 192.168.1.200</code><code class="linux">ping 192.168.1.200</code>. There should be response:</p>
-      <div class="mac">
-        <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-      </div>
-      <div class="win">
-        <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-      </div>
-      <div class="linux">
-        <pre>64 bytes from 192.168.1.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
-      </div>
-
-      <p>If on the other hand it says:</p>
-      <pre>Request timeout for icmp_seq 0</pre>
-      <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to check as the Pi takes about 20 seconds to boot.</p>
-
-      <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Run <code class="mac">ssh pi@192.168.2.200</code><code class="win">ssh pi@192.168.1.200</code><code class="linux">ssh pi@192.168.1.200</code> in the Terminal. Enter <code>raspberry</code> once prompted for a password.</p>
-      <p class="win">Use Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
-
-      <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
-
-
-      <h3>Configuration</h3>
+      <h3>Network settings</h3>
       <p>Ok, let's change the real network settings.</p>
 
       <p>To do that open the <code>/etc/network/interfaces</code> file in an text editor like the commandline nano. Type <code>sudo nano /etc/network/interfaces</code> in to the <span class="mac linux">Terminal</span><span class="win">Putty</span> window after you have successfully connected to the Pi via SSH.</p>
@@ -427,26 +422,6 @@
       <p>Now, let's reboot our Pi by using the <code>sudo reboot</code> command.</p>
 
       <p>If all is well, in approximately 15 to 30 seconds you will be able to connect to the Pi via SSH by using IP address <code class="mac">192.168.2.200</code><code class="win">192.168.1.200</code><code class="linux">192.168.1.200</code> (if you have not changed it for something else), username <code>pi</code> and password <code>raspberry</code>.</p>
-
-      <h3>Checking Internet connectivity</h3>
-
-      <p>To do this, try to download a web page using the command <b>wget</b>. For example <b>wget www.cc4av.info</b> . If everything goes well, you should get an answer like the following :</p>
-
-  <pre>
-  ...lots of text...
-  Saving to: `index.html'
-
-      [ <=>                                                                                                  ] 16,025      --.-K/s   in 0.06s   
-
-  2014-03-23 09:59:37 (263 KB/s) - `index.html' saved [16025]
-  </pre>
-
-      <p>If this failed, you might need to change your Pi's DNS settings. For this edit the file <b>etc/resolv.conf</b>. It should contain one line <code>nameserver 192.168.0.1</code>. Simply replace <code>192.168.0.1</code> by the address of the gateway. Then save the file and run <code>sudo reboot</code> to reboot the Pi. Then try again to download a web page.</p>
-
-
-
-      <!--_______________ SECTION 5 _______________-->
-      <h2>5. Configuring the Pi further</h2>
 
     	<h3>Expanding partition</h3>
 
