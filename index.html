@@ -475,7 +475,7 @@ gateway 192.168.1.1</pre>
   		<p>In <code>/home/pi</code> create an executable shell script called <code>startup.sh</code>:</p>
 
       <pre>touch startup.sh
-  chmod a+x startup.sh</pre>
+chmod a+x startup.sh</pre>
   		
   		<p>Then open <code>.bashrc</code></p> 
 
@@ -487,7 +487,7 @@ gateway 192.168.1.1</pre>
 
       <p>Save the file and exit.</p>
 
-  		<p>I think it is a good idea not to run everythin when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
+  		<p>I think it is a good idea not to run everything when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
 
   		<pre>sudo nano ~/startup.sh</pre>
 
@@ -495,13 +495,13 @@ gateway 192.168.1.1</pre>
 
   		<pre>#!/bin/bash
 
-  echo "Checking SSH connection...";
-  if [ -z "$SSH_CONNECTION" ]; then
-  	echo "No SSH connection, launching scripts.";
-  	# Your scripts here
-  else
-  	echo "SSH connection, nothing to be launched.";
-  fi</pre>
+echo "Checking SSH connection...";
+if [ -z "$SSH_CONNECTION" ]; then
+	echo "No SSH connection, launching scripts.";
+	# Your scripts here
+else
+	echo "SSH connection, nothing to be launched.";
+fi</pre>
 
   		<p>You can add your own scripts just after the <code># Your scripts here</code> line. When you are done, save the file and exit.</p>
 
