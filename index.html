@@ -124,7 +124,7 @@
 
   		<h3>Formatting the SD card</h3>
 
-  		<p>Before installing Raspbian, you must prepare your SD card by formatting it to FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
+  		<p>Before installing Raspbian, you must prepare your SD card by formatting it to the FAT32 file system. Some may say that it is useless as we will rewrite the whole file system in the next steps, but it is recomended to do it if your SD card will be used for the first time.</p>
 
   		<p class="mac win">Format the SD card to FAT32 file system using <a href="https://www.sdcard.org/downloads/formatter_4/">SDFormatter</a><span class="mac"> or Mac Disk Utility</span>.</p>
 
@@ -222,7 +222,17 @@
 
       <p>Now let's assign our laptop a static IP.</p>
 
-      <p><span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span><span class="win">TODO</span><span class="linux">Open the network manager, select your Ethernet connection and choose "static".</span> Set the IP address to <code>192.168.1.201</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You may need to disconnect from any wireless networks to make this work.</p>
+      <div class="mac">
+        <p><span class="mac">In Mac, open network preferences, choose "ethernet", and in the "Configure IPv4" field, choose "Manually".</span> 
+      </div>
+      <div class="win">
+        <p>Go to Network Settings and edit the TCP/IP part, set the IP address to "manual".</p>
+      </div>
+      <div class="linux">
+        <p>Open the network manager, select your Ethernet connection and choose "static".</p>
+      </div>
+
+      <p>Set the IP address to <code>192.168.1.201</code>, netmask to <code>255.255.255.0</code> and the gateway (router) address to <code>192.168.1.1</code>. You might need to disconnect from any wireless networks to make this work.</p></p>
 
 
       <h3>Booting up - the first time</h3>
