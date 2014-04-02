@@ -277,7 +277,7 @@
       <div class="win">
         <p>Click the <b>Start</b> button. Click the <b>Control Panel</b> item. In the search box type <code>adapter</code> and then, under <b>Network and Sharing Center</b>, click <b>View network connections</b>.</p>
 
-        <p>Choose the connection that you want to share, right-click it and click Properties.</p>
+        <p>Choose the connection that you want to share, right-click it and click <b>Properties</b>.</p>
 
         <p>Click <b>Sharing</b> tab and select the <b>Allow other network users to connect through this computer’s Internet connection</b> check box. Also, select in the drop down menu the connection to which you want to give Internet, basically the port to which your Pi is connected.</p>
 
@@ -394,32 +394,32 @@
       <div class="mac">
         <pre>auto lo
 
-  iface lo inet loopback
-  iface eth0 inet static
+iface lo inet loopback
+iface eth0 inet static
 
-  address 192.168.2.200
-  netmask 255.255.255.0
-  gateway 192.168.2.1</pre>
+address 192.168.2.200
+netmask 255.255.255.0
+gateway 192.168.2.1</pre>
       </div>
       <div class="win">
         <pre>auto lo
 
-  iface lo inet loopback
-  iface eth0 inet static
+iface lo inet loopback
+iface eth0 inet static
 
-  address 192.168.1.200
-  netmask 255.255.255.0
-  gateway 192.168.1.1</pre>
+address 192.168.1.200
+netmask 255.255.255.0
+gateway 192.168.1.1</pre>
       </div>
       <div class="linux">
         <pre>auto lo
 
-  iface lo inet loopback
-  iface eth0 inet static
+iface lo inet loopback
+iface eth0 inet static
 
-  address 192.168.1.200
-  netmask 255.255.255.0
-  gateway 192.168.1.1</pre>
+address 192.168.1.200
+netmask 255.255.255.0
+gateway 192.168.1.1</pre>
       </div>
 
       <p>Save the file and exit.</p>
@@ -436,7 +436,7 @@
 
       <p>If your whole installation is on the SD card, the easiest way to go is to use the <code>raspi-config</code> tool. Run <code>sudo raspi-config</code> in the Raspberry Pi console to open the tool's interface.</p>
 
-      <p>Select the appropriate menu item and press enter. You will have to reboot the Pi after this step.</p>
+      <p>Select the 1st menu item and press enter. You will have to reboot the Pi after this step.</p>
 
 
     	<h3>Auto Login</h3>
