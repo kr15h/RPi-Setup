@@ -440,12 +440,15 @@ gateway 192.168.1.1</pre>
 
       <h3>Configure keyboard</h3>
       <p>It is useful to configure the layout of your keyboard as for many following tasks you will need to type specific symbols that are usually hard to find on the keyboard if the layout is not the way it is on your main computer. Type the following in the Pi terminal to access keyboard configuration:</p>
-      <pre>dpkg-reconfigure keyboard-configuration
-service keyboard-setup restart</pre>
+      <pre>sudo raspi-config</pre>
+      <p>Go to <b>4 Internationalization Options</b>. From there choose <b>I3 Change Keyboard Layout</b> and hit enter.</p>
+
+      <h3>Set up timezone</h3>
+      <p>Assigning the right timezone might be also usefull, especially for debugging. There might be situations where knowing what happened at what time can be critical. So execute <code>sudo raspi-config</code> again and go to <b>4 Internationalization Options</b>, then <b>I2 Change Timezone</b>.</p>
 
     	<h3>Auto Login</h3>
     	
-    	<p>To make your pi log in automatically, run the following line in the shell:</p>
+    	<p>To make your Pi log in automatically, run the following line in the shell:</p>
 
     	<pre>sudo nano /etc/inittab</pre>
     	
