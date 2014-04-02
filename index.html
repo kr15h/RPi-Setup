@@ -153,12 +153,12 @@
      1:                 DOS_FAT_32 EMPTY                   3.9 GB     disk1s1
   </pre>
   		
-  		<p>As you see, there is a new device - <code>/dev/disk1</code>. On your computer, the device ID might be different (e.g. if you have more devices connected). <b>Try to find the ID that was not there before you inserted the SD card</b>.</p>
+  		<p>As you see, there is a new device - <code>/dev/disk1</code>. On your computer, the device <code>&lt;ID&gt;</code> might be different (e.g. if you have more devices connected). <b>Try to find the ID that was not there before you inserted the SD card</b>.</p>
 
 
       <h3>Burning Raspbian on the SD card</h3>
 
-  		<p>In you terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to run <code>cd /Users/me/</code>.
+  		<p>In your Terminal, navigate to the directory where your Raspbian image was extracted. Mine was extracted in my home directory <code>/Users/me/</code>, so I need to run <code>cd /Users/me/</code> in the Terminal.
 
       <p>Let's check that the image is there by running <code>ls</code>. A list of all files and sub-folders in the current directory should be printed, and you should see the extracted Raspbian image in the list. For example, mine is called <code>2014-01-07-wheezy-raspbian.img</code>.</p>
 
@@ -172,7 +172,7 @@
 
   		<p><code>if</code> is the input, <code>of</code> is the output and <code>bs</code> is the size of chunk of data that is being written to the output. Replace <code>&lt;image&gt;</code> by the name of your image file, and <code>&lt;ID&gt;</code> by the device ID of your SD card. For example, with the ID I found in previous step and the image file I have dowloaded, the command looks like the following :
       <code>sudo dd if=2014-01-07-wheezy-raspbian.img of=/dev/disk1 bs=1m</code>.
-      But be careful, as - once again - <b>your device ID and image file might be different than mine</b>.</p>
+      But be careful, as - once again - <b class="text-danger">your device ID and image file might be different than mine</b>.</p>
 
   		<p>Once you have double checked the ID, and image file name, execute the command. This process will take some time. So go make a coffee. And a sandwich. Don't worry if it seems to be idle. It isn't.</p>
 
