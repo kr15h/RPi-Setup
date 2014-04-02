@@ -436,8 +436,12 @@ gateway 192.168.1.1</pre>
 
       <p>If your whole installation is on the SD card, the easiest way to go is to use the <code>raspi-config</code> tool. Run <code>sudo raspi-config</code> in the Raspberry Pi console to open the tool's interface.</p>
 
-      <p>Select the 1st menu item and press enter. You will have to reboot the Pi after this step.</p>
+      <p>Select the first menu item (Expand Filesystem) and press enter. You will have to reboot the Pi after this step.</p>
 
+      <h3>Configure keyboard</h3>
+      <p>It is useful to configure the layout of your keyboard as for many following tasks you will need to type specific symbols that are usually hard to find on the keyboard if the layout is not the way it is on your main computer. Type the following in the Pi terminal to access keyboard configuration:</p>
+      <pre>dpkg-reconfigure keyboard-configuration
+service keyboard-setup restart</pre>
 
     	<h3>Auto Login</h3>
     	
