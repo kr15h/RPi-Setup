@@ -223,17 +223,26 @@
       <h3>Booting up - the first time</h3>
       <p>Connect your Raspberry Pi to the computer with an ethernet cable, eject the SD card from your computer, and put it in the Pi, <b>then</b> plug-in the Pi's power adapter.</p>
 
-      <p>First, let's test that we can reach the Pi with the IP address we gave it. For this, we will use the command <code>ping</code>. Run <code>ping 192.168.2.200</code>. There should be response:</p>
-      <div>
+      <p>First, let's test that we can reach the Pi with the IP address we gave it.</p> 
+
+      <div class="mac linux">
+        <p>For this, we will use the command <code>ping</code>. Run <code>ping 192.168.2.200</code> in the Terminal. There should be response:</p>
         <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+        <p>If the Raspberry Pi is not reachable:</p>
+        <pre>Request timeout for icmp_seq 0</pre>
+      </div>
+      <div class="win">
+        <p>For this, we will use the command <code>ping</code>. Run <code>ping 192.168.2.200</code> in the Command Prompt. To open the Command Prompt, go to Start and type cmd in the input text field and press enter. A window with black background and white text will open. There should be response:</p>
+        <pre>64 bytes from 192.168.2.200: icmp_seq=3 ttl=64 time=52.941 ms</pre>
+        <p>If the Raspberry Pi is not reachable:</p>
+        <pre>Request timeout for icmp_seq 0</pre>
       </div>
 
-      <p>If on the other hand it says:</p>
-      <pre>Request timeout for icmp_seq 0</pre>
+
       <p>It means that for some reason, the Pi cannot be reached. In that case, double check your network parameters. You might also have to wait as the Pi takes about 20 seconds to boot.</p>
 
       <p class="mac linux">Now that we made sure the Pi can be reached, let's connect to it. Run <code>ssh pi@192.168.2.200</code> in the Terminal. Enter <code>raspberry</code> once prompted for a password.</p>
-      <p class="win">Use MobaXterm to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
+      <p class="win">Use MobaXterm or Putty to connect to the Raspberry Pi by using IP address <code>192.168.1.200</code>, username <code>pi</code> and password <code>raspberry</code>.</p>
 
       <p>The SSH connection just opens a remote shell on the Raspberry Pi. Basically, you can run commands, just like in your own computer's terminal, but they are executed on the Raspberry Pi.</p>
 
