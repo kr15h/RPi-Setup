@@ -352,16 +352,15 @@ inet <b>192.168.2.1</b> netmask <b>0xffffff00</b> broadcast 192.168.2.255
 
       <p>Once connected, try to download a web page using the command <code>wget</code>. For example <code>wget www.cc4av.info</code> . If everything goes well, you should get an answer like the following :</p>
 
-  <pre>
-  ...lots of text...
-  Saving to: `index.html'
+      <pre>...lots of text...
+Saving to: `index.html'
 
-      [ <=>                                                                                                  ] 16,025      --.-K/s   in 0.06s   
+    [ <=> ] 16,025      --.-K/s   in 0.06s   
 
-  2014-03-23 09:59:37 (263 KB/s) - `index.html' saved [16025]
-  </pre>
+2014-03-23 09:59:37 (263 KB/s) - `index.html' saved [16025]
+      </pre>
 
-      <p>If this failed, you might need to change your Pi's DNS settings. For this edit the file <b>etc/resolv.conf</b>. It should contain one line <code>nameserver 192.168.0.1</code>. Simply replace <code>192.168.0.1</code> by <code>8.8.8.8</code>. Then save the file and run <code>sudo reboot</code> to reboot the Pi. Then try again to download a web page.</p>
+      <p>If this failed, you might need to change your Pi's DNS settings. For this edit the file <code>etc/resolv.conf</code>. It should contain one line <code>nameserver 192.168.0.1</code>. Simply replace <code>192.168.0.1</code> by <code>8.8.8.8</code>. Then save the file and run <code>sudo reboot</code> to reboot the Pi. Then try again to download a web page.</p>
 
 
       <h3>Connecting the Pi to a router</h3>
