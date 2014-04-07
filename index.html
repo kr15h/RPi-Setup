@@ -218,6 +218,8 @@
 
       <pre>dwc_otg.lpm_enable=0 console=ttyAMA0,115200 kgdboc=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait ip=192.168.1.200::192.168.1.1:255.255.255.0:rpi:eth0:off</pre>
 
+      <p>Notice that there should be just a space (' ') between the existing instructions and the line just added. Save and close the file. Eject the SD card before removal.</p>
+
       <p>We will be able to access the Pi through network with the IP address <code>192.168.1.200</code>.</p>
 
       <p>Now let's assign our laptop a static IP.</p>
