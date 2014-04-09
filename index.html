@@ -488,27 +488,27 @@ gateway 192.168.1.1</pre>
 
   		<h3>Startup scripts</h3>
 
-  		Starting a program on boot
-  		<p>In <code>/home/pi</code> create an executable shell script called <code>startup.sh</code>:</p>
+  		<h4>Starting a program on boot</h4>
 
-      <pre>touch startup.sh
-chmod a+x startup.sh</pre>
+      <p>On the Pi go to the <code>/home/pi</code> directory by typing the following in the terminal:</p>
+      <pre>cd /home/pi</pre>
+      <p>Press <kbd>Enter</kbd>. We are going to create a text file (a script) that will contain instructions for the Pi - what to do when it boot's up. To create the file, type <code>touch startup.sh</code> in the Pi Terminal and press <kbd>Enter</kbd>.</p> 
+
+      <p>Next, we are going to make it executable (launchable). Write <code>chmod a+x startup.sh</code> in the Pi Terminal and press <kbd>Enter</kbd> again.</p>
   		
-  		<p>Then open <code>.bashrc</code></p> 
+  		<p>Then open <code>.bashrc</code> by typing <code>sudo nano ~/.bashrc</code> in the Pi Terminal and pressing <kbd>Enter</kbd>.</p>
 
-  		<pre>sudo nano ~/.bashrc</pre>
-
-  		<p>and add the following line at the end of the file:</p>
+  		<p>Use arrow keys to navigate, add the following line at the end of the file:</p>
 
   		<pre>~/startup.sh</pre>
 
-      <p>Save the file and exit.</p>
+      <p>Save the file by pressing <kbd>Ctrl + X</kbd>, <kbd>Y</kbd> and <kbd>Enter</kbd> and exit.</p>
 
   		<p>I think it is a good idea not to run everything when you log in via SSH next time. Edit the <code>startup.sh</code> file to distinguish between direct login and SSH access. Open the file in text editor:</p>
 
   		<pre>sudo nano ~/startup.sh</pre>
 
-  		<p>Replace the contents of the file with the following:</p>
+  		<p>Don'f forget to press <kbd>Enter</kbd>. Replace the contents of the file with the following:</p>
 
   		<pre>#!/bin/bash
 
