@@ -15,7 +15,7 @@ The Python daemon is listening for TCP connections on the port 44555. Therefore,
 Installation
 --------------
 
-Installing is very simple. Copy `shutdown.py` to `/home/pi` and copy `shutdown-service` to `/etc/init.d`. Connect to your Pi and make sure that `shutdown-service` is executable by running `chmod a+x /home/etc/init.d/shutdown-service`. Next, activate the service on boot by running `sudo update-rc.d shutdown-service defaults`. And that's it!!! Now reboot your Pi, and reconnect to it. If you run `ps aux | grep shutdown` you should see something like this :
+Installing is very simple. Copy `shutdown.py` to `/home/pi` and copy `shutdown-service` to `/etc/init.d`. Connect to your Pi and make sure that `shutdown-service` is executable by running `chmod a+x /etc/init.d/shutdown-service`. Next, activate the service on boot by running `sudo update-rc.d shutdown-service defaults`. And that's it!!! Now reboot your Pi, and reconnect to it. If you run `ps aux | grep shutdown` you should see something like this :
 
 ```
 root      1962  0.4  1.0   8864  4688 ?        S    13:57   0:00 python /home/pi/shutdown.py
